@@ -1,0 +1,29 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #f0f8f0 0%, #e8f5e9 100%);
+  min-height: 100vh;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200"><defs><pattern id="waterMark" x="0" y="0" width="300" height="300" patternUnits="userSpaceOnUse"><circle cx="150" cy="150" r="100" fill="%234caf50" opacity="0.02"/></pattern></defs><rect fill="url(%23waterMark)" width="1200" height="1200"/></svg>') repeat;
+  pointer-events: none;
+  z-index: -1;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
