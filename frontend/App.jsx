@@ -4,12 +4,12 @@ import HomePage from './home'
 import './index.css'
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(true)
 
   return (
     <>
       {isLoggedIn ? (
-        <HomePage />
+        <HomePage onRequireLogin={() => setIsLoggedIn(false)} />
       ) : (
         <LoginPage onLogin={() => setIsLoggedIn(true)} />
       )}

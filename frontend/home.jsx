@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './home.css';
 
-const HomePage = () => {
+const HomePage = ({ onRequireLogin }) => {
   const [activeTab, setActiveTab] = useState('upload');
   const [uploadedImage, setUploadedImage] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
@@ -19,36 +19,9 @@ const HomePage = () => {
   ]);
   
   const videoRef = useRef(null);
+  const cameraStreamRef = useRef(null);
   const canvasRef = useRef(null);
   const fileInputRef = useRef(null);
-
-  // Mock plant analysis data
-  const mockAnalysisData = {
-    'tulsi': {
-      name: 'Tulsi (Holy Basil)',
-      confidence: '95%',
-      uses: ['Boosts immunity', 'Relieves stress', 'Improves respiratory health', 'Anti-inflammatory'],
-      benefits: 'Known as the "Queen of Herbs", Tulsi is rich in antioxidants and has been used in Ayurvedic medicine for centuries.',
-      growing: 'Grows well in warm, sunny locations. Water regularly and ensure good drainage.',
-      icon: '🌿'
-    },
-    'neem': {
-      name: 'Neem',
-      confidence: '92%',
-      uses: ['Skin purification', 'Antibacterial properties', 'Dental health', 'Detoxification'],
-      benefits: 'Neem is a powerful herb with natural antibiotic properties, excellent for skin and oral health.',
-      growing: 'Prefers warm climate. Can tolerate drought. Needs full sunlight.',
-      icon: '🍃'
-    },
-    'aloe': {
-      name: 'Aloe Vera',
-      confidence: '98%',
-      uses: ['Skin healing', 'Burn relief', 'Digestive health', 'Hydration'],
-      benefits: 'The gel inside leaves is rich in compounds that support skin health and healing.',
-      growing: 'Succulents that thrive in dry conditions. Water sparingly. Needs bright light.',
-      icon: '💚'
-    }
-  };
 
   // Handle manual image upload
   const handleImageUpload = (e) => {
@@ -65,47 +38,234 @@ const HomePage = () => {
 
   // Start camera
   const startCamera = async () => {
+    const isLocalhost = ['localhost', '127.0.0.1', '::1'].includes(window.location.hostname);
+
+    if (!window.isSecureContext && !isLocalhost) {
+      alert('Camera access requires a secure connection. Please use localhost or HTTPS, then try again.');
+      return;
+    }
+
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      alert('This browser does not support camera access. Try Chrome or Edge.');
+      return;
+    }
+
     try {
+      setActiveTab('camera');
+
       const stream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: 'environment' }
+        video: {
+          facingMode: { ideal: 'environment' }
+        },
+        audio: false
       });
+
+      cameraStreamRef.current = stream;
+
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
-        setCameraActive(true);
-        setActiveTab('camera');
+        await videoRef.current.play().catch(() => {});
       }
-    } catch (err) {
-      alert('Unable to access camera. Please check permissions.');
-      console.error(err);
+
+      setCameraActive(true);
+    } catch (error) {
+      console.error('Camera error:', error);
+      setCameraActive(false);
+
+      const message =
+        error?.name === 'NotAllowedError' || error?.name === 'PermissionDeniedError'
+          ? 'Camera permission was denied. Please click the lock icon in the address bar, allow Camera access, then refresh the page.'
+          : error?.name === 'NotFoundError'
+            ? 'No camera was found on this device.'
+            : 'Unable to access camera. Please check your browser camera permissions.';
+
+      alert(message);
     }
   };
 
   // Stop camera
   const stopCamera = () => {
-    if (videoRef.current && videoRef.current.srcObject) {
-      const tracks = videoRef.current.srcObject.getTracks();
-      tracks.forEach(track => track.stop());
-      setCameraActive(false);
+    const stream = cameraStreamRef.current || videoRef.current?.srcObject;
+
+    if (stream && typeof stream.getTracks === 'function') {
+      const tracks = stream.getTracks();
+
+      tracks.forEach((track) => {
+        track.stop();
+      });
+
+      cameraStreamRef.current = null;
     }
+
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.srcObject = null;
+    }
+
+    setCameraActive(false);
   };
+
+  useEffect(() => {
+    const video = videoRef.current;
+    const stream = cameraStreamRef.current;
+
+    if (cameraActive && video && stream) {
+      video.srcObject = stream;
+      video.play().catch((error) => {
+        console.error('Unable to start camera playback:', error);
+      });
+    }
+  }, [cameraActive]);
+
+  useEffect(() => {
+    if (activeTab === 'camera') {
+      setTimeout(() => {
+        const cameraSection = document.getElementById('camera-section');
+
+        if (cameraSection) {
+          cameraSection.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      }, 100);
+    }
+  }, [activeTab]);
+
+  useEffect(() => {
+    return () => {
+      stopCamera();
+    };
+  }, []);
 
   // Capture photo from camera
   const capturePhoto = () => {
-    if (videoRef.current && canvasRef.current) {
-      const context = canvasRef.current.getContext('2d');
-      canvasRef.current.width = videoRef.current.videoWidth;
-      canvasRef.current.height = videoRef.current.videoHeight;
-      context.drawImage(videoRef.current, 0, 0);
-      setUploadedImage(canvasRef.current.toDataURL('image/jpeg'));
-      setAnalysisResults(null);
-      stopCamera();
+
+  if (videoRef.current && canvasRef.current) {
+
+    const video = videoRef.current;
+    const canvas = canvasRef.current;
+
+    const context = canvas.getContext('2d');
+
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+
+    context.drawImage(
+      video,
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    );
+
+    const imageData =
+      canvas.toDataURL('image/jpeg', 0.9);
+
+    setUploadedImage(imageData);
+    setAnalysisResults(null);
+
+    stopCamera();
+
+    // Move to results tab
+    setActiveTab('results');
+  }
+};
+  const sendImageToBackend = async () => {
+
+  if (!uploadedImage) {
+    alert('Please capture or upload an image first.');
+    return;
+  }
+
+  try {
+
+    setAnalyzing(true);
+    setActiveTab('results');
+
+    // Re-encode uploads and camera captures at a bounded size. Phone photos
+    // can otherwise be tens of megapixels and exhaust OpenCV while decoding.
+    const source = await createImageBitmap(await (await fetch(uploadedImage)).blob());
+    const maxDimension = 1600;
+    const scale = Math.min(1, maxDimension / Math.max(source.width, source.height));
+    const canvas = document.createElement('canvas');
+    canvas.width = Math.max(1, Math.round(source.width * scale));
+    canvas.height = Math.max(1, Math.round(source.height * scale));
+    canvas.getContext('2d').drawImage(source, 0, 0, canvas.width, canvas.height);
+    source.close();
+    const blob = await new Promise((resolve, reject) => {
+      canvas.toBlob((value) => value ? resolve(value) : reject(new Error('Could not prepare this image. Try another photo.')), 'image/jpeg', 0.82);
+    });
+
+    // Create FormData
+    const formData = new FormData();
+
+    formData.append(
+      'image',
+      blob,
+      'herb.jpg'
+    );
+
+    // Send image to Python Flask
+    const backendResponse = await fetch('/api/analyze', { method: 'POST', body: formData });
+
+    // Read as text first so an empty response or a Flask/Vite error page
+    // does not hide the actual HTTP response behind a JSON parse exception.
+    const responseText = await backendResponse.text();
+    let data;
+
+    try {
+      data = responseText ? JSON.parse(responseText) : null;
+    } catch {
+      throw new Error(
+        `Backend returned a non-JSON response (HTTP ${backendResponse.status}). ` +
+        `Response: ${responseText.slice(0, 300) || '(empty)'}. Check the Flask terminal and confirm it is running on port 5001.`
+      );
     }
-  };
+
+    if (!data) {
+      throw new Error(
+        `Backend returned an empty response (HTTP ${backendResponse.status}). ` +
+        'The Flask server returned no error details. Check its terminal for the traceback and confirm it is the backend started from this project.'
+      );
+    }
+
+    if (!backendResponse.ok || !data.success) {
+
+      throw new Error(
+        data.message || 'Analysis failed'
+      );
+    }
+
+    // Set result received from Python
+    setAnalysisResults(
+      data.result
+    );
+
+  } catch (error) {
+
+    console.error(
+      'Backend error:',
+      error
+    );
+
+    alert(error.message || 'Unable to connect to HerbVisionAI backend.');
+
+  } finally {
+
+    setAnalyzing(false);
+  }
+};
 
   // Handle search
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
+      if (onRequireLogin) {
+        onRequireLogin();
+        return;
+      }
+
       // Add to recent searches
       setRecentSearches([searchQuery, ...recentSearches.slice(0, 4)]);
       performSearch(searchQuery);
@@ -133,26 +293,35 @@ const HomePage = () => {
     }
   };
 
-  // Handle analyze button
-  const handleAnalyze = () => {
-    if (uploadedImage) {
-      setAnalyzing(true);
-      
-      // Simulate API call with mock data
-      setTimeout(() => {
-        const randomKey = Object.keys(mockAnalysisData)[Math.floor(Math.random() * Object.keys(mockAnalysisData).length)];
-        setAnalysisResults(mockAnalysisData[randomKey]);
-        setAnalyzing(false);
-        setActiveTab('results');
-      }, 2000);
-    }
-  };
-
   // Handle logout
   const handleLogout = () => {
     localStorage.removeItem('authToken');
     sessionStorage.removeItem('authToken');
     // In a real app, redirect to login page
+  };
+
+  const handleAnalyze = () => {
+    if (uploadedImage) {
+      setAnalyzing(true);
+
+      setTimeout(() => {
+        const randomKey =
+          Object.keys(mockAnalysisData)[
+            Math.floor(
+              Math.random() *
+              Object.keys(mockAnalysisData).length
+            )
+          ];
+
+        setAnalysisResults(
+          mockAnalysisData[randomKey]
+        );
+
+        setAnalyzing(false);
+        setActiveTab('results');
+
+      }, 2000);
+    }
   };
 
   return (
@@ -219,16 +388,10 @@ const HomePage = () => {
         <div className="action-buttons">
           <button
             className={`action-btn camera-btn ${cameraActive ? 'active' : ''}`}
-            onClick={() => {
-              if (cameraActive) {
-                stopCamera();
-              } else {
-                startCamera();
-              }
-            }}
+            onClick={startCamera}
           >
             <span className="btn-icon">📷</span>
-            <span className="btn-text">{cameraActive ? 'Stop Camera' : 'Open Camera'}</span>
+            <span className="btn-text">Open Camera</span>
           </button>
 
           <button
@@ -295,14 +458,14 @@ const HomePage = () => {
                     <>
                       <img src={uploadedImage} alt="Uploaded" className="preview-image" />
                       <button 
-                        className="analyze-btn-small"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleAnalyze();
-                        }}
-                      >
-                        🔬 Analyze This Image
-                      </button>
+  className="analyze-btn-small"
+  onClick={(e) => {
+    e.stopPropagation();
+    sendImageToBackend();
+  }}
+>
+  🔬 Analyze This Image
+</button>
                     </>
                   )}
                 </div>
@@ -312,22 +475,42 @@ const HomePage = () => {
 
           {/* Camera Tab */}
           {activeTab === 'camera' && (
-            <div className="tab-content">
-              <div className="camera-container">
-                <video
-                  ref={videoRef}
-                  className="camera-feed"
-                  autoPlay
-                  playsInline
-                  muted
-                />
-                <canvas ref={canvasRef} style={{ display: 'none' }} />
-                {cameraActive && (
-                  <button className="capture-btn" onClick={capturePhoto}>
-                    📸 Capture
-                  </button>
+            <div id="camera-section" className="tab-content camera-content">
+              <div className="camera-preview">
+                {cameraActive ? (
+                  <video
+                    ref={videoRef}
+                    autoPlay
+                    playsInline
+                    muted
+                    className="camera-video"
+                  />
+                ) : (
+                  <div className="camera-placeholder">
+                    <div className="camera-icon">📷</div>
+                    <h3>Camera is Off</h3>
+                    <p>Click Open Camera to start your camera.</p>
+                  </div>
                 )}
+                <canvas ref={canvasRef} style={{ display: 'none' }} />
               </div>
+              {cameraActive && (
+                <div className="camera-controls">
+                  <button
+                    className="capture-btn"
+                    onClick={capturePhoto}
+                  >
+                    📸 Capture Photo
+                  </button>
+
+                  <button
+                    className="stop-camera-btn"
+                    onClick={stopCamera}
+                  >
+                    🔴 Turn Off Camera
+                  </button>
+                </div>
+              )}
             </div>
           )}
 
@@ -352,10 +535,36 @@ const HomePage = () => {
                         <span className="confidence">Confidence: {analysisResults.confidence}</span>
                       </div>
 
+                      {(analysisResults.scientific_name || analysisResults.plant_family) && (
+                        <div className="result-section">
+                          <h4>Plant Details:</h4>
+                          {analysisResults.scientific_name && (
+                            <p><strong>Scientific Name:</strong> <em>{analysisResults.scientific_name}</em></p>
+                          )}
+                          {analysisResults.plant_family && (
+                            <p><strong>Plant Family:</strong> {analysisResults.plant_family}</p>
+                          )}
+                        </div>
+                      )}
+
+                      {analysisResults.description && (
+                        <div className="result-section">
+                          <h4>Description:</h4>
+                          <p>{analysisResults.description}</p>
+                        </div>
+                      )}
+
+                      {analysisResults.medicine_properties && (
+                        <div className="result-section">
+                          <h4>Medicinal Properties:</h4>
+                          <p>{analysisResults.medicine_properties}</p>
+                        </div>
+                      )}
+
                       <div className="result-section">
                         <h4>Uses & Benefits:</h4>
                         <ul className="uses-list">
-                          {analysisResults.uses.map((use, idx) => (
+                          {(analysisResults.uses || []).map((use, idx) => (
                             <li key={idx}>✓ {use}</li>
                           ))}
                         </ul>
@@ -370,6 +579,31 @@ const HomePage = () => {
                         <h4>Growing Tips:</h4>
                         <p>{analysisResults.growing}</p>
                       </div>
+
+                      {analysisResults.parts_commonly_used?.length > 0 && (
+                        <div className="result-section">
+                          <h4>Part Commonly Used in Medicine:</h4>
+                          <p>{analysisResults.parts_commonly_used.join(', ')}</p>
+                        </div>
+                      )}
+
+                      {analysisResults.leaf_features && (
+                        <div className="result-section">
+                          <h4>Leaf Features:</h4>
+                          <p>
+                            {Object.entries(analysisResults.leaf_features)
+                              .map(([label, value]) => `${label}: ${value}`)
+                              .join(' • ')}
+                          </p>
+                        </div>
+                      )}
+
+                      {analysisResults.note && (
+                        <div className="result-section">
+                          <h4>Note:</h4>
+                          <p>{analysisResults.note}</p>
+                        </div>
+                      )}
 
                       <div className="action-buttons-result">
                         <button className="action-btn" onClick={() => {
@@ -391,10 +625,15 @@ const HomePage = () => {
                     </>
                   ) : (
                     <div className="results-placeholder">
-                      <button className="analyze-btn" onClick={handleAnalyze}>
-                        🔬 Analyze Plant
+                      <button className="analyze-btn" onClick={sendImageToBackend} disabled={analyzing}>
+                        <span className="analyze-btn-icon" aria-hidden="true">🌿</span>
+                        <span className="analyze-btn-copy">
+                          <span className="analyze-btn-title">Analyze Plant</span>
+                          <span className="analyze-btn-subtitle">Discover its details</span>
+                        </span>
+                        <span className="analyze-btn-arrow" aria-hidden="true">→</span>
                       </button>
-                      <p>Click "Analyze Plant" to get detailed information about this plant</p>
+                      <p>Get medicinal uses, leaf details, and growing tips</p>
                     </div>
                   )}
                 </div>
@@ -467,301 +706,3 @@ const HomePage = () => {
 };
 
 export default HomePage;
-
-
-// import React, { useRef, useState } from 'react';
-// import './home.css';
-
-// // const plants = [
-// //   ['Tulsi (Holy Basil)', 'Immunity, respiratory health', '🌿'],
-// //   ['Neem', 'Skin care, antibacterial', '🍃'],
-// //   ['Aloe Vera', 'Healing, skin regeneration', '💚'],
-// //   ['Ginger', 'Digestion, inflammation', '🫚'],
-// //   ['Mint', 'Digestion, fresh breath', '🌱'],
-// //   ['Turmeric', 'Anti-inflammatory, antioxidant', '🌼']
-// // ];
-
-// // const info = {
-// //   tulsi: ['Tulsi (Holy Basil)', '95%', ['Boosts immunity','Relieves stress','Improves respiratory health','Anti-inflammatory'], '🌿'],
-// //   neem: ['Neem', '92%', ['Skin purification','Antibacterial properties','Dental health','Detoxification'], '🍃'],
-// //   aloe: ['Aloe Vera', '98%', ['Skin healing','Burn relief','Digestive health','Hydration'], '💚']
-// // };
-
-// const features = [
-//   ['🤖','AI-Powered Recognition','Advanced machine learning identifies plants with high accuracy'],
-//   ['📚','Comprehensive Database','Access detailed information about thousands of herbs and plants'],
-//   ['⚡','Instant Results','Get results in seconds using our optimized AI model'],
-//   ['📱','Mobile Friendly','Works seamlessly on all devices with camera support']
-// ];
-
-// export default function HomePage() {
-//   const [tab,setTab] = useState('upload'), [image,setImage] = useState(null);
-//   const [query,setQuery] = useState(''), [camera,setCamera] = useState(false);
-//   const [loading,setLoading] = useState(false), [result,setResult] = useState(null);
-//   const [recent,setRecent] = useState([]);
-
-//   const video = useRef(), canvas = useRef(), file = useRef();
-
-//   const stopCamera = () => {
-//     video.current?.srcObject?.getTracks().forEach(t => t.stop());
-//     if(video.current) video.current.srcObject = null;
-//     setCamera(false);
-//   };
-
-//   const startCamera = async () => {
-//     try {
-//       video.current.srcObject = await navigator.mediaDevices.getUserMedia({
-//         video:{facingMode:'environment'}
-//       });
-//       setCamera(true); setTab('camera');
-//     } catch(e) {
-//       alert('Unable to access camera. Please check permissions.');
-//     }
-//   };
-
-//   const upload = e => {
-//     const f = e.target.files?.[0];
-//     if(!f) return;
-//     const r = new FileReader();
-//     r.onload = e => { setImage(e.target.result); setResult(null); };
-//     r.readAsDataURL(f);
-//   };
-
-//   const capture = () => {
-//     const v = video.current, c = canvas.current;
-//     c.width = v.videoWidth; c.height = v.videoHeight;
-//     c.getContext('2d').drawImage(v,0,0);
-//     setImage(c.toDataURL('image/jpeg'));
-//     stopCamera(); setTab('results'); setResult(null);
-//   };
-
-//   const search = q => {
-//     const p = plants.find(x =>
-//       x[0].toLowerCase().includes(q.toLowerCase()) ||
-//       x[1].toLowerCase().includes(q.toLowerCase())
-//     );
-//     if(!p) return;
-//     setResult({
-//       name:p[0], confidence:'89%', uses:p[1].split(', '),
-//       benefits:`${p[0]} is a medicinal herb with multiple health benefits.`,
-//       growing:'This herb can be grown in gardens or pots for easy access.',
-//       icon:p[2]
-//     });
-//     setTab('results');
-//   };
-
-//   const submitSearch = e => {
-//     e.preventDefault();
-//     if(!query.trim()) return;
-//     setRecent(r => [query,...r.filter(x => x !== query)].slice(0,5));
-//     search(query);
-//   };
-
-//   const analyze = () => {
-//     if(!image) return;
-//     setLoading(true); setTab('results');
-//     setTimeout(() => {
-//       const keys = Object.keys(info), p = info[keys[Math.floor(Math.random()*keys.length)]];
-//       setResult({
-//         name:p[0], confidence:p[1], uses:p[2], icon:p[3],
-//         benefits:`${p[0]} is rich in natural compounds and has been traditionally used for various health benefits.`,
-//         growing:'Grows well with proper sunlight, watering and good drainage.'
-//       });
-//       setLoading(false);
-//     },1500);
-//   };
-
-//   const reset = () => { setImage(null); setResult(null); setTab('upload'); };
-
-//   return <div className="home-page">
-
-//     <nav className="navbar">
-//       <div className="nav-container">
-//         <div className="logo"><h1>🌿 HerbVisionAI</h1></div>
-//         <ul className="nav-links">
-//           {['About','HerbPedia','Services','Contact'].map(x =>
-//             <li key={x}><a href={`#${x.toLowerCase()}`}>{x}</a></li>
-//           )}
-//         </ul>
-//         <button className="logout-btn" onClick={() => {
-//           localStorage.removeItem('authToken');
-//           sessionStorage.removeItem('authToken');
-//         }}>Logout</button>
-//       </div>
-//     </nav>
-
-//     <section className="hero-section">
-//       <div className="hero-content">
-//         <h2>Identify Herbs & Plants Instantly</h2>
-//         <p>Use AI-powered plant recognition to identify herbs and learn about their properties</p>
-
-//         <form className="search-form" onSubmit={submitSearch}>
-//           <input className="search-input"
-//             placeholder="Search herbs, plants, or diseases..."
-//             value={query} onChange={e => setQuery(e.target.value)}
-//           />
-//           <button className="search-btn">🔍 Search</button>
-//         </form>
-
-//         {recent.length > 0 &&
-//           <div className="recent-searches">
-//             <p>Recent:</p>
-//             {recent.map(x =>
-//               <button key={x} className="search-tag"
-//                 onClick={() => {setQuery(x);search(x)}}>{x}</button>
-//             )}
-//           </div>
-//         }
-//       </div>
-//     </section>
-
-//     <section className="action-section">
-//       <div className="action-buttons">
-//         <button className={`action-btn camera-btn ${camera?'active':''}`}
-//           onClick={camera ? stopCamera : startCamera}>
-//           📷 <span className="btn-text">{camera?'Stop Camera':'Open Camera'}</span>
-//         </button>
-
-//         <button className="action-btn upload-btn" onClick={() => file.current?.click()}>
-//           📁 <span className="btn-text">Upload Image</span>
-//         </button>
-
-//         <input ref={file} type="file" accept="image/*" hidden onChange={upload}/>
-//       </div>
-//     </section>
-
-//     <section className="tabs-section">
-//       <div className="tabs-container">
-
-//         <div className="tabs-header">
-//           {[
-//             ['upload','📤 Upload Image'],
-//             ['camera','📷 Camera'],
-//             ['results','✓ Results']
-//           ].map(([id,label]) =>
-//             <button key={id}
-//               className={`tab-btn ${tab===id?'active':''}`}
-//               disabled={id==='results' && !image && !result}
-//               onClick={() => id==='camera' ? startCamera() : (stopCamera(),setTab(id))}>
-//               {label}
-//             </button>
-//           )}
-//         </div>
-
-//         {tab==='upload' &&
-//           <div className="tab-content">
-//             <div className="upload-area">
-//               <div className="upload-box" onClick={() => file.current?.click()}>
-//                 <div className="upload-icon">🖼️</div>
-//                 <h3>Upload Plant Image</h3>
-//                 <p>Click to select an image or drag and drop</p>
-//                 {image && <>
-//                   <img src={image} alt="Uploaded" className="preview-image"/>
-//                   <button className="analyze-btn-small"
-//                     onClick={e => {e.stopPropagation();analyze()}}>
-//                     🔬 Analyze This Image
-//                   </button>
-//                 </>}
-//               </div>
-//             </div>
-//           </div>
-//         }
-
-//         {tab==='camera' &&
-//           <div className="tab-content">
-//             <div className="camera-container">
-//               <video ref={video} className="camera-feed" autoPlay playsInline muted/>
-//               <canvas ref={canvas} hidden/>
-//               {camera && <button className="capture-btn" onClick={capture}>📸 Capture</button>}
-//             </div>
-//           </div>
-//         }
-
-//         {tab==='results' && (image || result) &&
-//           <div className="tab-content">
-//             <div className="results-container">
-
-//               <div className="results-image">
-//                 {image && <img src={image} alt="Analysis"/>}
-//               </div>
-
-//               <div className="results-info">
-//                 {loading ? <div className="analyzing-state">
-//                   <div className="spinner"/>
-//                   <p>Analyzing plant...</p>
-//                 </div> : result ? <>
-
-//                   <div className="result-header">
-//                     <span className="plant-icon">{result.icon}</span>
-//                     <h3>{result.name}</h3>
-//                     <span className="confidence">Confidence: {result.confidence}</span>
-//                   </div>
-
-//                   <div className="result-section">
-//                     <h4>Uses & Benefits:</h4>
-//                     <ul className="uses-list">
-//                       {result.uses.map((x,i) => <li key={i}>✓ {x}</li>)}
-//                     </ul>
-//                   </div>
-
-//                   <div className="result-section">
-//                     <h4>About:</h4><p>{result.benefits}</p>
-//                   </div>
-
-//                   <div className="result-section">
-//                     <h4>Growing Tips:</h4><p>{result.growing}</p>
-//                   </div>
-
-//                   <div className="action-buttons-result">
-//                     <button className="action-btn" onClick={reset}>📁 Upload Another</button>
-//                     <button className="action-btn" onClick={() => {
-//                       reset(); startCamera();
-//                     }}>📷 Take Photo</button>
-//                   </div>
-
-//                 </> : <div className="results-placeholder">
-//                   <button className="analyze-btn" onClick={analyze}>🔬 Analyze Plant</button>
-//                   <p>Click "Analyze Plant" to get detailed information about this plant</p>
-//                 </div>}
-//               </div>
-//             </div>
-//           </div>
-//         }
-
-//       </div>
-//     </section>
-
-//     <section className="featured-plants">
-//       <h2>Featured Medicinal Plants</h2>
-//       <div className="plants-grid">
-//         {plants.map(([name,uses,icon],i) =>
-//           <div key={i} className="plant-card"
-//             onClick={() => {setQuery(name);search(name);window.scrollTo({top:0,behavior:'smooth'})}}>
-//             <div className="plant-icon-large">{icon}</div>
-//             <h3>{name}</h3><p>{uses}</p>
-//           </div>
-//         )}
-//       </div>
-//     </section>
-
-//     <section className="features-section">
-//       <h2>Why Choose HerbVisionAI?</h2>
-//       <div className="features-grid">
-//         {features.map(([icon,title,text]) =>
-//           <div className="feature-card" key={title}>
-//             <div className="feature-icon">{icon}</div>
-//             <h3>{title}</h3><p>{text}</p>
-//           </div>
-//         )}
-//       </div>
-//     </section>
-
-//     <footer className="footer">
-//       <p>&copy; 2026 HerbVisionAI. All rights reserved.</p>
-//       <div className="footer-links">
-//         {['Privacy','Terms','Support'].map(x => <a key={x} href={`#${x.toLowerCase()}`}>{x}</a>)}
-//       </div>
-//     </footer>
-
-//   </div>;
-// }

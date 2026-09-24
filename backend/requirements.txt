@@ -1,0 +1,10 @@
+Flask>=3.1,<4
+flask-cors>=6,<7
+opencv-python-headless>=4.10,<5
+numpy==2.0.2
+pandas==2.2.3
+
+# Native Windows uses the CPU TensorFlow package. The CUDA extra is supported
+# on Linux/WSL2, not native Windows.
+tensorflow==2.18.0; sys_platform == "win32"
+tensorflow[and-cuda]==2.18.0; sys_platform == "linux"

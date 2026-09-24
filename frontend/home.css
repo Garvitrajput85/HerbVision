@@ -382,39 +382,90 @@
   box-shadow: 0 6px 12px rgba(45, 80, 22, 0.3);
 }
 
-/* Camera Container */
-.camera-container {
+/* Camera Section */
+.camera-content {
+  width: 100%;
+  padding: 30px;
+  box-sizing: border-box;
+  scroll-margin-top: 80px;
+}
+
+.camera-preview {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  border-radius: 15px;
+  overflow: hidden;
+  background: #111;
+}
+
+.camera-video {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 400px;
+  object-fit: cover;
+}
+
+.camera-placeholder {
+  min-height: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
-  min-height: 400px;
+  justify-content: center;
+  text-align: center;
+  background: #f5f5f5;
 }
 
-.camera-feed {
-  width: 100%;
-  max-width: 500px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  background: #000;
+.camera-icon {
+  font-size: 60px;
+  margin-bottom: 15px;
+}
+
+.camera-placeholder h3 {
+  color: #2f641f;
+  margin: 10px 0;
+}
+
+.camera-placeholder p {
+  color: #777;
+}
+
+.camera-controls {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
 }
 
 .capture-btn {
-  padding: 12px 30px;
-  background-color: #ff6b6b;
-  color: white;
+  padding: 12px 25px;
   border: none;
   border-radius: 8px;
+  background: #2f641f;
+  color: white;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
 }
 
 .capture-btn:hover {
-  background-color: #ff5252;
-  transform: scale(1.05);
-  box-shadow: 0 6px 12px rgba(255, 107, 107, 0.3);
+  opacity: 0.9;
+}
+
+.stop-camera-btn {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 8px;
+  background: #dc3545;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.stop-camera-btn:hover {
+  opacity: 0.9;
 }
 
 /* Results Container */
@@ -558,14 +609,97 @@
 
 .results-placeholder {
   background: #f9f9f9;
-  padding: 20px;
-  border-radius: 8px;
-  border-left: 4px solid #4a7c3b;
+  padding: 28px 24px;
+  border-radius: 18px;
+  border-left: 5px solid #4a7c3b;
   text-align: center;
 }
 
+.analyze-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+  min-width: 290px;
+  padding: 16px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 18px;
+  background: linear-gradient(120deg, #1f4d16, #397b32 58%, #63a34c);
+  color: #fff;
+  box-shadow: 0 9px 22px rgba(45, 80, 22, 0.24), inset 0 1px rgba(255, 255, 255, 0.2);
+  text-align: left;
+  cursor: pointer;
+  transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+}
+
+.analyze-btn:hover:not(:disabled) {
+  transform: translateY(-3px);
+  filter: saturate(1.12);
+  box-shadow: 0 14px 28px rgba(45, 80, 22, 0.32), inset 0 1px rgba(255, 255, 255, 0.2);
+}
+
+.analyze-btn:active:not(:disabled) {
+  transform: translateY(-1px) scale(0.99);
+}
+
+.analyze-btn:focus-visible {
+  outline: 3px solid #9dcc79;
+  outline-offset: 4px;
+}
+
+.analyze-btn-icon {
+  display: grid;
+  flex: 0 0 48px;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.16);
+  font-size: 27px;
+}
+
+.analyze-btn-copy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.analyze-btn-title {
+  font-size: 18px;
+  font-weight: 750;
+  letter-spacing: 0.01em;
+}
+
+.analyze-btn-subtitle {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 13px;
+}
+
+.analyze-btn-arrow {
+  display: grid;
+  flex: 0 0 34px;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.17);
+  font-size: 22px;
+  transition: transform 180ms ease;
+}
+
+.analyze-btn:hover .analyze-btn-arrow {
+  transform: translateX(3px);
+}
+
+.analyze-btn:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
 .results-placeholder p {
-  color: #999;
+  margin: 13px 0 0;
+  color: #6b7568;
+  font-size: 14px;
 }
 
 /* Featured Plants Section */
@@ -786,6 +920,27 @@
 
   .tab-content {
     padding: 20px;
+  }
+
+  .results-placeholder {
+    padding: 20px 14px;
+  }
+
+  .analyze-btn {
+    width: 100%;
+    min-width: 0;
+    gap: 11px;
+    padding: 13px;
+  }
+
+  .analyze-btn-icon {
+    flex-basis: 42px;
+    width: 42px;
+    height: 42px;
+  }
+
+  .analyze-btn-title {
+    font-size: 16px;
   }
 
   .upload-box {

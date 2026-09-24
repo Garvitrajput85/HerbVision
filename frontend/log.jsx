@@ -59,7 +59,7 @@ const LoginPage = ({ onLogin }) => {
 
       // For demo purposes, accept any valid email/password combination
       // In production, this would call your backend API
-      if (process.env.NODE_ENV !== 'production') {
+      if (import.meta.env.DEV) {
         // Demo mode - accept login
         setSuccess('Login successful! Redirecting...');
         setFormData({ email: '', password: '' });
