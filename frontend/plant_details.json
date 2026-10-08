@@ -1,0 +1,2562 @@
+{
+  "plants": [
+    {
+      "id": "ashwagandha",
+      "name": "Ashwagandha",
+      "scientific_name": "Withania somnifera",
+      "icon": "🌿",
+      "uses": [
+        "Traditional vitality and stress-support formulations"
+      ],
+      "benefits": "Traditionally valued for Traditional vitality and stress-support formulations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A warm-season, drought-tolerant shrub; sunny position and well-drained soil.",
+      "leaf_features": {
+        "shape": "Ovate to elliptic",
+        "arrangement": "Alternate",
+        "edge": "Entire"
+      },
+      "medicine_properties": "Traditionally described as a rasayana and restorative herb; clinical effects depend on preparation and are not established by this profile.",
+      "parts_commonly_used": [
+        "Roots"
+      ]
+    },
+    {
+      "id": "aloe-vera",
+      "name": "Aloe Vera",
+      "scientific_name": "Aloe vera",
+      "icon": "🌿",
+      "uses": [
+        "Topical skin-care preparations",
+        "Ornamental succulent"
+      ],
+      "benefits": "Traditionally valued for Topical skin-care preparations, Ornamental succulent. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A frost-sensitive succulent; bright sun and sharply drained soil, with sparse watering.",
+      "leaf_features": {
+        "shape": "Fleshy lance-shaped leaves",
+        "arrangement": "Basal rosette",
+        "edge": "Spiny"
+      },
+      "medicine_properties": "The leaf gel is traditionally used topically for skin care; oral latex and gel have different safety profiles.",
+      "parts_commonly_used": [
+        "Leaf gel",
+        "latex is distinct and should not be confused with gel"
+      ],
+      "note": "Do not ingest aloe latex as a home remedy; products and plant parts differ."
+    },
+    {
+      "id": "neem",
+      "name": "Neem",
+      "scientific_name": "Azadirachta indica",
+      "icon": "🌿",
+      "uses": [
+        "Traditional skin and oral-care preparations",
+        "Shade tree"
+      ],
+      "benefits": "Traditionally valued for Traditional skin and oral-care preparations, Shade tree. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A heat- and drought-tolerant tropical tree; full sun and well-drained soil.",
+      "leaf_features": {
+        "shape": "Pinnate compound leaves with toothed leaflets",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Leaves, bark, seed oil and other parts have distinct traditional uses; antimicrobial activity is studied, but preparations are not interchangeable.",
+      "parts_commonly_used": [
+        "Leaves, bark, seeds and seed oil"
+      ],
+      "note": "Neem oil and seeds can be harmful if swallowed, especially by children."
+    },
+    {
+      "id": "amla",
+      "name": "Amla",
+      "scientific_name": "Phyllanthus emblica",
+      "icon": "🌿",
+      "uses": [
+        "Food and preserves",
+        "Traditional Ayurvedic formulations"
+      ],
+      "benefits": "Traditionally valued for Food and preserves, Traditional Ayurvedic formulations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A tropical to subtropical tree; sunny position and well-drained soil.",
+      "leaf_features": {
+        "shape": "Small oblong leaflets",
+        "arrangement": "Closely set on pinnate branchlets"
+      },
+      "medicine_properties": "Fruit is valued as food and in Ayurveda; traditional antioxidant and digestive-support associations do not establish a treatment.",
+      "parts_commonly_used": [
+        "Fruit"
+      ]
+    },
+    {
+      "id": "arjuna",
+      "name": "Arjuna",
+      "scientific_name": "Terminalia arjuna",
+      "icon": "🌿",
+      "uses": [
+        "Traditional bark-based formulations",
+        "Shade and avenue tree"
+      ],
+      "benefits": "Traditionally valued for Traditional bark-based formulations, Shade and avenue tree. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A large tree suited to warm climates; often grows near rivers, in moist but draining soil.",
+      "leaf_features": {
+        "shape": "Oblong to elliptic",
+        "arrangement": "Opposite or sub-opposite",
+        "edge": "Entire"
+      },
+      "medicine_properties": "Bark is used in traditional formulations, including those associated with heart health; this is not a substitute for cardiac care.",
+      "parts_commonly_used": [
+        "Stem bark"
+      ],
+      "note": "Do not use for heart conditions without a qualified clinician."
+    },
+    {
+      "id": "haritaki",
+      "name": "Haritaki",
+      "scientific_name": "Terminalia chebula",
+      "icon": "🌿",
+      "uses": [
+        "Traditional digestive formulations",
+        "Triphala preparations"
+      ],
+      "benefits": "Traditionally valued for Traditional digestive formulations, Triphala preparations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A warm-climate deciduous tree; sun and deep, well-drained soil.",
+      "leaf_features": {
+        "shape": "Elliptic to lance-shaped",
+        "arrangement": "Opposite or sub-opposite"
+      },
+      "medicine_properties": "The fruit is one of the traditional Triphala ingredients and is associated with digestive preparations.",
+      "parts_commonly_used": [
+        "Fruit"
+      ]
+    },
+    {
+      "id": "bibhitaki",
+      "name": "Bibhitaki",
+      "scientific_name": "Terminalia bellirica",
+      "icon": "🌿",
+      "uses": [
+        "Triphala preparations",
+        "Traditional respiratory and digestive formulations"
+      ],
+      "benefits": "Traditionally valued for Triphala preparations, Traditional respiratory and digestive formulations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A large tree for warm regions; prefers sunlight and deep, well-drained soil.",
+      "leaf_features": {
+        "shape": "Broad elliptic",
+        "arrangement": "Alternate or sub-opposite"
+      },
+      "medicine_properties": "The fruit is one of the traditional Triphala ingredients and is used in classical Ayurvedic preparations.",
+      "parts_commonly_used": [
+        "Fruit"
+      ]
+    },
+    {
+      "id": "shatavari",
+      "name": "Shatavari",
+      "scientific_name": "Asparagus racemosus",
+      "icon": "🌿",
+      "uses": [
+        "Traditional root-based formulations"
+      ],
+      "benefits": "Traditionally valued for Traditional root-based formulations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A climbing plant for warm climates; partial shade to sun, moist and well-drained soil.",
+      "leaf_features": {
+        "shape": "Needle-like cladodes; true leaves are scale-like",
+        "arrangement": "Cladodes in clusters"
+      },
+      "medicine_properties": "The tuberous roots are traditionally used in Ayurvedic nourishing and reproductive-health formulations; effects are not established here.",
+      "parts_commonly_used": [
+        "Tuberous roots"
+      ]
+    },
+    {
+      "id": "punarnava",
+      "name": "Punarnava",
+      "scientific_name": "Boerhavia diffusa",
+      "icon": "🌿",
+      "uses": [
+        "Traditional root and whole-plant formulations"
+      ],
+      "benefits": "Traditionally valued for Traditional root and whole-plant formulations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A warm-climate herb that tolerates seasonal dryness; sun and well-drained soil.",
+      "leaf_features": {
+        "shape": "Ovate leaves, often unequal at the base",
+        "arrangement": "Opposite"
+      },
+      "medicine_properties": "Root and whole plant appear in traditional Ayurvedic formulations, including those associated with fluid balance.",
+      "parts_commonly_used": [
+        "Roots",
+        "whole plant"
+      ]
+    },
+    {
+      "id": "manjistha",
+      "name": "Manjistha",
+      "scientific_name": "Rubia cordifolia",
+      "icon": "🌿",
+      "uses": [
+        "Traditional root-based preparations",
+        "Natural dye"
+      ],
+      "benefits": "Traditionally valued for Traditional root-based preparations, Natural dye. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A climbing herb; provide support, partial sun and moist, well-drained soil.",
+      "leaf_features": {
+        "shape": "Heart-shaped to ovate",
+        "arrangement": "Whorled or in groups"
+      },
+      "medicine_properties": "Root is used in traditional Ayurvedic preparations, including those associated with skin care; clinical efficacy is not established.",
+      "parts_commonly_used": [
+        "Roots"
+      ]
+    },
+    {
+      "id": "sarpagandha",
+      "name": "Sarpagandha",
+      "scientific_name": "Rauvolfia serpentina",
+      "icon": "🌿",
+      "uses": [
+        "Prescription traditional formulations only"
+      ],
+      "benefits": "Traditionally valued for Prescription traditional formulations only. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A tropical understory shrub; partial shade and moist, humus-rich soil.",
+      "leaf_features": {
+        "shape": "Elliptic to lance-shaped",
+        "arrangement": "Whorled"
+      },
+      "medicine_properties": "Root contains potent alkaloids and has a history in traditional medicine; it can interact with medicines and requires professional supervision.",
+      "parts_commonly_used": [
+        "Root"
+      ],
+      "note": "Potentially potent; do not self-medicate. May interact with blood-pressure and other medicines."
+    },
+    {
+      "id": "safed-musli",
+      "name": "Safed Musli",
+      "scientific_name": "Chlorophytum borivilianum",
+      "icon": "🌿",
+      "uses": [
+        "Traditional root-based tonic formulations"
+      ],
+      "benefits": "Traditionally valued for Traditional root-based tonic formulations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A warm-season herb; loose, fertile, well-drained soil and regular moisture during growth.",
+      "leaf_features": {
+        "shape": "Narrow lance-shaped",
+        "arrangement": "Basal rosette"
+      },
+      "medicine_properties": "The tuberous roots are valued in traditional tonic formulations; evidence and products vary.",
+      "parts_commonly_used": [
+        "Tuberous roots"
+      ]
+    },
+    {
+      "id": "vidanga",
+      "name": "Vidanga",
+      "scientific_name": "Embelia ribes",
+      "icon": "🌿",
+      "uses": [
+        "Traditional digestive formulations"
+      ],
+      "benefits": "Traditionally valued for Traditional digestive formulations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A woody climber or shrub for warm, humid conditions; partial sun and support where needed.",
+      "leaf_features": {
+        "shape": "Elliptic to lance-shaped",
+        "arrangement": "Opposite"
+      },
+      "medicine_properties": "Fruit is used in traditional formulations, especially those associated with digestive and intestinal health.",
+      "parts_commonly_used": [
+        "Fruit"
+      ]
+    },
+    {
+      "id": "gokshura",
+      "name": "Gokshura",
+      "scientific_name": "Tribulus terrestris",
+      "icon": "🌿",
+      "uses": [
+        "Traditional fruit-based formulations"
+      ],
+      "benefits": "Traditionally valued for Traditional fruit-based formulations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A low-growing, warm-season herb; full sun and sandy, well-drained soil.",
+      "leaf_features": {
+        "shape": "Pinnate leaves with paired leaflets",
+        "arrangement": "Opposite"
+      },
+      "medicine_properties": "Fruit is used in traditional Ayurvedic formulations; marketed claims about performance or urinary health are not established by this entry.",
+      "parts_commonly_used": [
+        "Fruit"
+      ]
+    },
+    {
+      "id": "gudmar",
+      "name": "Gudmar",
+      "scientific_name": "Gymnema sylvestre",
+      "icon": "🌿",
+      "uses": [
+        "Traditional leaf preparations"
+      ],
+      "benefits": "Traditionally valued for Traditional leaf preparations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A tropical woody climber; warm conditions, support and well-drained soil.",
+      "leaf_features": {
+        "shape": "Ovate to elliptic",
+        "arrangement": "Opposite"
+      },
+      "medicine_properties": "Leaves are used in traditional preparations associated with sugar metabolism; they may affect blood glucose and interact with diabetes medicines.",
+      "parts_commonly_used": [
+        "Leaves"
+      ],
+      "note": "May lower blood sugar; consult a clinician before combining with diabetes medicines."
+    },
+    {
+      "id": "shankhpushpi",
+      "name": "Shankhpushpi",
+      "scientific_name": "Convolvulus pluricaulis",
+      "icon": "🌿",
+      "uses": [
+        "Traditional memory and calming formulations"
+      ],
+      "benefits": "Traditionally valued for Traditional memory and calming formulations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A low-growing herb; sunny to partly shaded position and well-drained soil.",
+      "leaf_features": {
+        "shape": "Small elliptic leaves",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Aerial parts are used in traditional formulations associated with memory and calming; clinical benefit is not established here.",
+      "parts_commonly_used": [
+        "Aerial parts"
+      ],
+      "note": "The common name is applied to multiple species; verify botanical identity."
+    },
+    {
+      "id": "yashtimadhu",
+      "name": "Yashtimadhu",
+      "scientific_name": "Glycyrrhiza glabra",
+      "icon": "🌿",
+      "uses": [
+        "Traditional throat and digestive preparations",
+        "Flavoring"
+      ],
+      "benefits": "Traditionally valued for Traditional throat and digestive preparations, Flavoring. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A perennial herb; full sun and deep, moist but well-drained soil.",
+      "leaf_features": {
+        "shape": "Pinnate leaves with rounded leaflets",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Root is used in traditional preparations for throat and digestive comfort; prolonged or high intake can cause serious adverse effects.",
+      "parts_commonly_used": [
+        "Root and stolon"
+      ],
+      "note": "Licorice may raise blood pressure and lower potassium; avoid unsupervised or prolonged use."
+    },
+    {
+      "id": "chirata",
+      "name": "Chirata",
+      "scientific_name": "Swertia chirata",
+      "icon": "🌿",
+      "uses": [
+        "Traditional bitter tonic preparations"
+      ],
+      "benefits": "Traditionally valued for Traditional bitter tonic preparations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A cool-climate Himalayan herb; moist, humus-rich soil and partial sun.",
+      "leaf_features": {
+        "shape": "Lance-shaped leaves",
+        "arrangement": "Opposite"
+      },
+      "medicine_properties": "The bitter whole plant is used in traditional formulations, commonly associated with appetite and fever-related preparations.",
+      "parts_commonly_used": [
+        "Whole plant / aerial parts"
+      ]
+    },
+    {
+      "id": "kutki",
+      "name": "Kutki",
+      "scientific_name": "Picrorhiza kurroa",
+      "icon": "🌿",
+      "uses": [
+        "Traditional rhizome-based formulations"
+      ],
+      "benefits": "Traditionally valued for Traditional rhizome-based formulations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A high-altitude Himalayan herb; cool conditions, moist soil and partial shade.",
+      "leaf_features": {
+        "shape": "Narrow lance-shaped",
+        "arrangement": "Basal rosette"
+      },
+      "medicine_properties": "Rhizome is used in traditional Ayurvedic formulations, particularly those associated with liver and digestive health.",
+      "parts_commonly_used": [
+        "Rhizome and roots"
+      ],
+      "note": "Wild populations are vulnerable to overharvesting; use cultivated, traceable material."
+    },
+    {
+      "id": "daruharidra",
+      "name": "Daruharidra",
+      "scientific_name": "Berberis aristata",
+      "icon": "🌿",
+      "uses": [
+        "Traditional topical and internal formulations"
+      ],
+      "benefits": "Traditionally valued for Traditional topical and internal formulations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A cool to temperate thorny shrub; sun and well-drained soil.",
+      "leaf_features": {
+        "shape": "Oval leaves with spiny margins",
+        "arrangement": "Clustered on short shoots"
+      },
+      "medicine_properties": "Stem and root tissues are used in traditional preparations; berberine-containing plants can interact with medicines.",
+      "parts_commonly_used": [
+        "Stem, root and wood"
+      ],
+      "note": "May interact with medicines; avoid use during pregnancy or for infants without clinical advice."
+    },
+    {
+      "id": "turmeric",
+      "name": "Turmeric",
+      "scientific_name": "Curcuma longa",
+      "icon": "🌿",
+      "uses": [
+        "Food and spice",
+        "Traditional topical and culinary preparations"
+      ],
+      "benefits": "Traditionally valued for Food and spice, Traditional topical and culinary preparations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A warm, humid crop; partial sun, fertile soil and consistent moisture.",
+      "leaf_features": {
+        "shape": "Large lance-shaped leaves",
+        "arrangement": "Basal, in two ranks"
+      },
+      "medicine_properties": "Rhizome is a culinary spice and traditional ingredient; curcumin research does not establish turmeric as a cure.",
+      "parts_commonly_used": [
+        "Rhizome"
+      ]
+    },
+    {
+      "id": "ginger",
+      "name": "Ginger",
+      "scientific_name": "Zingiber officinale",
+      "icon": "🌿",
+      "uses": [
+        "Food and spice",
+        "Tea and traditional digestive preparations"
+      ],
+      "benefits": "Traditionally valued for Food and spice, Tea and traditional digestive preparations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "Warm and humid conditions; filtered light, rich soil and regular moisture.",
+      "leaf_features": {
+        "shape": "Long lance-shaped leaves",
+        "arrangement": "Alternate in two ranks"
+      },
+      "medicine_properties": "Rhizome is widely used as food and in traditional preparations for digestive comfort.",
+      "parts_commonly_used": [
+        "Rhizome"
+      ]
+    },
+    {
+      "id": "long-pepper",
+      "name": "Long Pepper",
+      "scientific_name": "Piper longum",
+      "icon": "🌿",
+      "uses": [
+        "Spice",
+        "Traditional formulations"
+      ],
+      "benefits": "Traditionally valued for Spice, Traditional formulations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A tropical climber; warm, humid conditions, partial shade and support.",
+      "leaf_features": {
+        "shape": "Heart-shaped to ovate",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Fruit is a spice and a traditional ingredient in digestive and respiratory formulations.",
+      "parts_commonly_used": [
+        "Fruit spikes",
+        "root in some traditions"
+      ]
+    },
+    {
+      "id": "black-pepper",
+      "name": "Black Pepper",
+      "scientific_name": "Piper nigrum",
+      "icon": "🌿",
+      "uses": [
+        "Food and spice",
+        "Traditional preparations"
+      ],
+      "benefits": "Traditionally valued for Food and spice, Traditional preparations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A tropical climbing vine; humid warmth, filtered light and support.",
+      "leaf_features": {
+        "shape": "Broad ovate leaves",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Fruit is a culinary spice and traditional ingredient; most uses are culinary rather than treatment.",
+      "parts_commonly_used": [
+        "Fruit (peppercorn)"
+      ]
+    },
+    {
+      "id": "cinnamon",
+      "name": "Cinnamon",
+      "scientific_name": "Cinnamomum verum",
+      "icon": "🌿",
+      "uses": [
+        "Food and spice",
+        "Traditional warming preparations"
+      ],
+      "benefits": "Traditionally valued for Food and spice, Traditional warming preparations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A tropical evergreen tree; warm humid climate and well-drained soil.",
+      "leaf_features": {
+        "shape": "Oblong leaves with three prominent veins",
+        "arrangement": "Opposite"
+      },
+      "medicine_properties": "Inner bark is used as a spice and in traditional preparations; concentrated products may affect medicines and blood sugar.",
+      "parts_commonly_used": [
+        "Inner bark"
+      ],
+      "note": "Cassia cinnamon and Ceylon cinnamon are different; concentrated supplements may interact with medicines."
+    },
+    {
+      "id": "tejpat",
+      "name": "Tejpat",
+      "scientific_name": "Cinnamomum tamala",
+      "icon": "🌿",
+      "uses": [
+        "Food and spice",
+        "Traditional preparations"
+      ],
+      "benefits": "Traditionally valued for Food and spice, Traditional preparations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A subtropical evergreen tree; sun to partial shade and well-drained soil.",
+      "leaf_features": {
+        "shape": "Lance-shaped with three prominent veins",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Leaves are a culinary spice and are used in traditional formulations.",
+      "parts_commonly_used": [
+        "Leaves",
+        "bark in some traditions"
+      ]
+    },
+    {
+      "id": "lodhra",
+      "name": "Lodhra",
+      "scientific_name": "Symplocos racemosa",
+      "icon": "🌿",
+      "uses": [
+        "Traditional bark-based formulations"
+      ],
+      "benefits": "Traditionally valued for Traditional bark-based formulations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A tree or large shrub for subtropical climates; moist, well-drained soil.",
+      "leaf_features": {
+        "shape": "Elliptic to oblong",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Bark appears in traditional Ayurvedic formulations, including topical and reproductive-health preparations.",
+      "parts_commonly_used": [
+        "Bark"
+      ]
+    },
+    {
+      "id": "bakuchi",
+      "name": "Bakuchi",
+      "scientific_name": "Psoralea corylifolia",
+      "icon": "🌿",
+      "uses": [
+        "Traditional external skin preparations"
+      ],
+      "benefits": "Traditionally valued for Traditional external skin preparations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A warm-climate herb; sun and well-drained soil.",
+      "leaf_features": {
+        "shape": "Broad ovate leaves",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Seeds and seed oil are used in traditional skin preparations; psoralen compounds can cause severe photosensitivity.",
+      "parts_commonly_used": [
+        "Seeds"
+      ],
+      "note": "Can cause burns and photosensitivity; avoid self-treatment and unprotected sun exposure."
+    },
+    {
+      "id": "kantakari",
+      "name": "Kantakari",
+      "scientific_name": "Solanum virginianum",
+      "icon": "🌿",
+      "uses": [
+        "Traditional respiratory formulations"
+      ],
+      "benefits": "Traditionally valued for Traditional respiratory formulations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A hardy warm-climate herb; sun and well-drained soil.",
+      "leaf_features": {
+        "shape": "Ovate leaves, often lobed and prickly",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Aerial parts and roots are used in traditional formulations, including those associated with cough.",
+      "parts_commonly_used": [
+        "Aerial parts",
+        "roots and fruit in some traditions"
+      ]
+    },
+    {
+      "id": "brihati",
+      "name": "Brihati",
+      "scientific_name": "Solanum indicum",
+      "icon": "🌿",
+      "uses": [
+        "Traditional formulations"
+      ],
+      "benefits": "Traditionally valued for Traditional formulations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A warm-climate shrub; full sun and well-drained soil.",
+      "leaf_features": {
+        "shape": "Ovate leaves, sometimes lobed or spiny",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Root and fruit are used in traditional Ayurvedic formulations; correct species identification is important.",
+      "parts_commonly_used": [
+        "Roots and fruit"
+      ],
+      "note": "Common names can refer to related Solanum species; verify the scientific name."
+    },
+    {
+      "id": "eranda",
+      "name": "Eranda",
+      "scientific_name": "Ricinus communis",
+      "icon": "🌿",
+      "uses": [
+        "Processed castor oil and industrial uses"
+      ],
+      "benefits": "Traditionally valued for Processed castor oil and industrial uses. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A fast-growing tropical shrub; full sun and well-drained soil.",
+      "leaf_features": {
+        "shape": "Large palmately lobed leaves",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Castor oil from processed seeds has specific medicinal and industrial uses; raw seeds contain a potent toxin.",
+      "parts_commonly_used": [
+        "Processed seed oil",
+        "leaves in traditional external preparations"
+      ],
+      "note": "Seeds are highly poisonous if chewed or swallowed. Keep away from children and pets."
+    },
+    {
+      "id": "nirgundi",
+      "name": "Nirgundi",
+      "scientific_name": "Vitex negundo",
+      "icon": "🌿",
+      "uses": [
+        "Traditional external preparations",
+        "Hedge and ornamental shrub"
+      ],
+      "benefits": "Traditionally valued for Traditional external preparations, Hedge and ornamental shrub. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A hardy shrub; full sun to partial shade and well-drained soil.",
+      "leaf_features": {
+        "shape": "Pinnate leaves with 3–5 leaflets",
+        "arrangement": "Opposite"
+      },
+      "medicine_properties": "Leaves and other parts appear in traditional external preparations associated with aches and swelling.",
+      "parts_commonly_used": [
+        "Leaves",
+        "roots and seeds in some traditions"
+      ]
+    },
+    {
+      "id": "danti",
+      "name": "Danti",
+      "scientific_name": "Baliospermum montanum",
+      "icon": "🌿",
+      "uses": [
+        "Traditional formulations under practitioner supervision"
+      ],
+      "benefits": "Traditionally valued for Traditional formulations under practitioner supervision. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A tropical shrub; warm conditions and well-drained soil.",
+      "leaf_features": {
+        "shape": "Broad ovate leaves",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Root is used in classical traditional formulations; it is a strong purgative and can be toxic.",
+      "parts_commonly_used": [
+        "Root and seeds"
+      ],
+      "note": "Potentially toxic and strongly purgative; do not self-medicate."
+    },
+    {
+      "id": "chitrak",
+      "name": "Chitrak",
+      "scientific_name": "Plumbago zeylanica",
+      "icon": "🌿",
+      "uses": [
+        "Traditional formulations under practitioner supervision"
+      ],
+      "benefits": "Traditionally valued for Traditional formulations under practitioner supervision. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A tropical shrub or climber; sun to partial shade and well-drained soil.",
+      "leaf_features": {
+        "shape": "Ovate to elliptic",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Root is used in traditional formulations, but contains irritant compounds and requires careful expert handling.",
+      "parts_commonly_used": [
+        "Root"
+      ],
+      "note": "Can irritate or burn skin and mucous membranes; avoid unsupervised use."
+    },
+    {
+      "id": "ativisha",
+      "name": "Ativisha",
+      "scientific_name": "Aconitum heterophyllum",
+      "icon": "🌿",
+      "uses": [
+        "Traditional formulations under qualified supervision"
+      ],
+      "benefits": "Traditionally valued for Traditional formulations under qualified supervision. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A high-altitude Himalayan herb; cool conditions, moist soil and partial shade.",
+      "leaf_features": {
+        "shape": "Deeply divided leaves",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Root is used in traditional formulations after correct processing; aconite species may be toxic if misidentified or improperly prepared.",
+      "parts_commonly_used": [
+        "Processed root"
+      ],
+      "note": "Aconite plants can be poisonous. Do not collect or use without expert identification and supervision."
+    },
+    {
+      "id": "vacha",
+      "name": "Vacha",
+      "scientific_name": "Acorus calamus",
+      "icon": "🌿",
+      "uses": [
+        "Traditional formulations; aromatic uses"
+      ],
+      "benefits": "Traditionally valued for Traditional formulations; aromatic uses. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A wetland plant; consistently moist soil or shallow water and sun to partial shade.",
+      "leaf_features": {
+        "shape": "Sword-shaped leaves",
+        "arrangement": "Basal, fan-like"
+      },
+      "medicine_properties": "Rhizome has traditional uses, but some varieties contain beta-asarone, raising safety concerns.",
+      "parts_commonly_used": [
+        "Rhizome"
+      ],
+      "note": "Safety depends on chemotype and preparation; avoid unsupervised ingestion."
+    },
+    {
+      "id": "jatamansi",
+      "name": "Jatamansi",
+      "scientific_name": "Nardostachys jatamansi",
+      "icon": "🌿",
+      "uses": [
+        "Traditional aromatic and calming formulations"
+      ],
+      "benefits": "Traditionally valued for Traditional aromatic and calming formulations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A cool, high-altitude plant; moist humus-rich soil and partial shade.",
+      "leaf_features": {
+        "shape": "Pinnate leaves with narrow leaflets",
+        "arrangement": "Basal and stem leaves"
+      },
+      "medicine_properties": "Rhizome is used in traditional aromatic and calming preparations; wild harvesting threatens this Himalayan species.",
+      "parts_commonly_used": [
+        "Rhizome and roots"
+      ],
+      "note": "Use cultivated, traceable material; do not harvest wild plants."
+    },
+    {
+      "id": "tagar",
+      "name": "Tagar",
+      "scientific_name": "Valeriana wallichii",
+      "icon": "🌿",
+      "uses": [
+        "Traditional aromatic preparations"
+      ],
+      "benefits": "Traditionally valued for Traditional aromatic preparations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A temperate herb; partial shade and moist, well-drained soil.",
+      "leaf_features": {
+        "shape": "Pinnate leaves with toothed leaflets",
+        "arrangement": "Opposite"
+      },
+      "medicine_properties": "Root is used in traditional aromatic and calming preparations; species identity and dose matter.",
+      "parts_commonly_used": [
+        "Root and rhizome"
+      ]
+    },
+    {
+      "id": "kapikacchu",
+      "name": "Kapikacchu",
+      "scientific_name": "Mucuna pruriens",
+      "icon": "🌿",
+      "uses": [
+        "Traditional seed-based formulations under supervision"
+      ],
+      "benefits": "Traditionally valued for Traditional seed-based formulations under supervision. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A warm-climate climbing legume; support, sun and well-drained soil.",
+      "leaf_features": {
+        "shape": "Trifoliate leaves",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Seeds contain levodopa and are used in traditional formulations; they can interact with Parkinson’s medicines.",
+      "parts_commonly_used": [
+        "Seeds",
+        "pods and roots in some traditions"
+      ],
+      "note": "Contains pharmacologically active levodopa; consult a clinician, especially if taking neurological medicines."
+    },
+    {
+      "id": "shalaparni",
+      "name": "Shalaparni",
+      "scientific_name": "Desmodium gangeticum",
+      "icon": "🌿",
+      "uses": [
+        "Dashamula and other traditional formulations"
+      ],
+      "benefits": "Traditionally valued for Dashamula and other traditional formulations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A warm-climate perennial herb; sun and well-drained soil.",
+      "leaf_features": {
+        "shape": "Trifoliate leaves",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Root and whole plant are ingredients in traditional Dashamula formulations.",
+      "parts_commonly_used": [
+        "Root",
+        "whole plant"
+      ]
+    },
+    {
+      "id": "prishniparni",
+      "name": "Prishniparni",
+      "scientific_name": "Uraria picta",
+      "icon": "🌿",
+      "uses": [
+        "Dashamula and other traditional formulations"
+      ],
+      "benefits": "Traditionally valued for Dashamula and other traditional formulations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A warm-climate herb; full sun and well-drained soil.",
+      "leaf_features": {
+        "shape": "Trifoliate leaves with patterned markings",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Root and whole plant are ingredients in traditional Dashamula formulations.",
+      "parts_commonly_used": [
+        "Root",
+        "whole plant"
+      ]
+    },
+    {
+      "id": "bilva",
+      "name": "Bilva",
+      "scientific_name": "Aegle marmelos",
+      "icon": "🌿",
+      "uses": [
+        "Fruit food",
+        "Traditional digestive formulations"
+      ],
+      "benefits": "Traditionally valued for Fruit food, Traditional digestive formulations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A drought-tolerant subtropical tree; full sun and well-drained soil.",
+      "leaf_features": {
+        "shape": "Trifoliate leaves",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Unripe fruit and other parts appear in traditional preparations; ripe fruit is also eaten.",
+      "parts_commonly_used": [
+        "Fruit, leaves, root and bark"
+      ]
+    },
+    {
+      "id": "agnimantha",
+      "name": "Agnimantha",
+      "scientific_name": "Clerodendrum phlomoides",
+      "icon": "🌿",
+      "uses": [
+        "Dashamula and other traditional formulations"
+      ],
+      "benefits": "Traditionally valued for Dashamula and other traditional formulations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A warm-climate shrub or small tree; sun and well-drained soil.",
+      "leaf_features": {
+        "shape": "Ovate leaves",
+        "arrangement": "Opposite"
+      },
+      "medicine_properties": "Root and bark are used as ingredients in traditional Dashamula formulations.",
+      "parts_commonly_used": [
+        "Root and bark"
+      ],
+      "note": "Common name can refer to different species; verify taxonomy."
+    },
+    {
+      "id": "gambhari",
+      "name": "Gambhari",
+      "scientific_name": "Gmelina arborea",
+      "icon": "🌿",
+      "uses": [
+        "Traditional formulations",
+        "Timber and shade tree"
+      ],
+      "benefits": "Traditionally valued for Traditional formulations, Timber and shade tree. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A fast-growing tropical tree; sun and deep, well-drained soil.",
+      "leaf_features": {
+        "shape": "Large heart-shaped to ovate leaves",
+        "arrangement": "Opposite"
+      },
+      "medicine_properties": "Root, bark and fruit appear in traditional Ayurvedic formulations; the tree is also valued for timber.",
+      "parts_commonly_used": [
+        "Root, bark, leaves and fruit"
+      ]
+    },
+    {
+      "id": "shyonaka",
+      "name": "Shyonaka",
+      "scientific_name": "Oroxylum indicum",
+      "icon": "🌿",
+      "uses": [
+        "Dashamula and other traditional formulations"
+      ],
+      "benefits": "Traditionally valued for Dashamula and other traditional formulations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A tropical deciduous tree; sunny site and well-drained soil.",
+      "leaf_features": {
+        "shape": "Large pinnate leaves with many leaflets",
+        "arrangement": "Opposite"
+      },
+      "medicine_properties": "Root bark and other parts are ingredients in traditional Dashamula formulations.",
+      "parts_commonly_used": [
+        "Root bark",
+        "stem bark and seeds in some traditions"
+      ]
+    },
+    {
+      "id": "patala",
+      "name": "Patala",
+      "scientific_name": "Stereospermum suaveolens",
+      "icon": "🌿",
+      "uses": [
+        "Dashamula and other traditional formulations"
+      ],
+      "benefits": "Traditionally valued for Dashamula and other traditional formulations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A warm-climate tree; sunny position and well-drained soil.",
+      "leaf_features": {
+        "shape": "Pinnate leaves",
+        "arrangement": "Opposite"
+      },
+      "medicine_properties": "Root bark is used in traditional Dashamula formulations; verify identity because common names vary.",
+      "parts_commonly_used": [
+        "Root bark"
+      ],
+      "note": "Common name varies regionally; match the scientific name."
+    },
+    {
+      "id": "musta",
+      "name": "Musta",
+      "scientific_name": "Cyperus rotundus",
+      "icon": "🌿",
+      "uses": [
+        "Traditional digestive preparations",
+        "Aromatic rhizome"
+      ],
+      "benefits": "Traditionally valued for Traditional digestive preparations, Aromatic rhizome. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A hardy sedge; sun and moist soil, though established plants tolerate drier sites.",
+      "leaf_features": {
+        "shape": "Narrow grass-like leaves",
+        "arrangement": "Three-ranked basal leaves"
+      },
+      "medicine_properties": "Rhizome is used in traditional digestive formulations and has aromatic uses.",
+      "parts_commonly_used": [
+        "Rhizome"
+      ]
+    },
+    {
+      "id": "atibala",
+      "name": "Atibala",
+      "scientific_name": "Abutilon indicum",
+      "icon": "🌿",
+      "uses": [
+        "Traditional formulations",
+        "Fibre and local uses"
+      ],
+      "benefits": "Traditionally valued for Traditional formulations, Fibre and local uses. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A warm-climate herb or shrub; sun and well-drained soil.",
+      "leaf_features": {
+        "shape": "Heart-shaped leaves with toothed margins",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Root and aerial parts appear in traditional formulations; the plant is also used for fibre in some regions.",
+      "parts_commonly_used": [
+        "Root, leaves and whole plant"
+      ]
+    },
+    {
+      "id": "bala",
+      "name": "Bala",
+      "scientific_name": "Sida cordifolia",
+      "icon": "🌿",
+      "uses": [
+        "Traditional root-based formulations"
+      ],
+      "benefits": "Traditionally valued for Traditional root-based formulations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A warm-climate herb; sunny position and well-drained soil.",
+      "leaf_features": {
+        "shape": "Heart-shaped to ovate, toothed leaves",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Root and whole plant are used in traditional formulations; evidence and preparation vary.",
+      "parts_commonly_used": [
+        "Root",
+        "whole plant"
+      ]
+    },
+    {
+      "id": "nagabala",
+      "name": "Nagabala",
+      "scientific_name": "Grewia hirsuta",
+      "icon": "🌿",
+      "uses": [
+        "Traditional formulations"
+      ],
+      "benefits": "Traditionally valued for Traditional formulations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A warm-climate shrub; sun and well-drained soil.",
+      "leaf_features": {
+        "shape": "Ovate leaves with toothed margins",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Root and aerial parts are included in some traditional formulations; verify species identity.",
+      "parts_commonly_used": [
+        "Root and aerial parts"
+      ],
+      "note": "Common name can be applied to several species; verify the scientific name."
+    },
+    {
+      "id": "vidarikand",
+      "name": "Vidarikand",
+      "scientific_name": "Pueraria tuberosa",
+      "icon": "🌿",
+      "uses": [
+        "Traditional root-tuber formulations",
+        "Food in some regions"
+      ],
+      "benefits": "Traditionally valued for Traditional root-tuber formulations, Food in some regions. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A warm-season climbing legume; support, sun and moist, well-drained soil.",
+      "leaf_features": {
+        "shape": "Trifoliate leaves",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Tuber is used in traditional nourishing formulations and is also prepared as food in some regions.",
+      "parts_commonly_used": [
+        "Tuberous root"
+      ]
+    },
+    {
+      "id": "sariva",
+      "name": "Sariva",
+      "scientific_name": "Hemidesmus indicus",
+      "icon": "🌿",
+      "uses": [
+        "Traditional root-based preparations",
+        "Aromatic beverage ingredient"
+      ],
+      "benefits": "Traditionally valued for Traditional root-based preparations, Aromatic beverage ingredient. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A tropical climber; partial shade, support and consistently moist soil.",
+      "leaf_features": {
+        "shape": "Narrow lance-shaped leaves",
+        "arrangement": "Opposite"
+      },
+      "medicine_properties": "Root is used in traditional cooling and aromatic preparations.",
+      "parts_commonly_used": [
+        "Root"
+      ]
+    },
+    {
+      "id": "ushira",
+      "name": "Ushira",
+      "scientific_name": "Chrysopogon zizanioides",
+      "icon": "🌿",
+      "uses": [
+        "Traditional aromatic drinks",
+        "Fragrance and matting"
+      ],
+      "benefits": "Traditionally valued for Traditional aromatic drinks, Fragrance and matting. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A perennial grass; full sun and moist soil; tolerates seasonal flooding.",
+      "leaf_features": {
+        "shape": "Long, narrow grass leaves",
+        "arrangement": "Basal clumps"
+      },
+      "medicine_properties": "Aromatic roots are used in traditional cooling preparations, mats and perfumery.",
+      "parts_commonly_used": [
+        "Roots"
+      ]
+    },
+    {
+      "id": "lajjalu",
+      "name": "Lajjalu",
+      "scientific_name": "Mimosa pudica",
+      "icon": "🌿",
+      "uses": [
+        "Traditional folk preparations",
+        "Ornamental curiosity"
+      ],
+      "benefits": "Traditionally valued for Traditional folk preparations, Ornamental curiosity. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A warm-climate groundcover; sun to partial shade and moist, well-drained soil.",
+      "leaf_features": {
+        "shape": "Bipinnate leaves with many small leaflets",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Leaves and roots appear in folk and traditional preparations; contact can cause skin sensitivity in some people.",
+      "parts_commonly_used": [
+        "Leaves, roots and whole plant"
+      ]
+    },
+    {
+      "id": "arka",
+      "name": "Arka",
+      "scientific_name": "Calotropis gigantea",
+      "icon": "🌿",
+      "uses": [
+        "Traditional external uses only under expert supervision"
+      ],
+      "benefits": "Traditionally valued for Traditional external uses only under expert supervision. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A drought-tolerant tropical shrub; full sun and very well-drained soil.",
+      "leaf_features": {
+        "shape": "Large opposite, oblong leaves",
+        "arrangement": "Opposite"
+      },
+      "medicine_properties": "Latex and other parts have traditional uses but are caustic and potentially poisonous.",
+      "parts_commonly_used": [
+        "Leaves, roots, flowers and latex"
+      ],
+      "note": "Latex is caustic and poisonous; avoid contact with eyes, skin and mouth."
+    },
+    {
+      "id": "saptaparna",
+      "name": "Saptaparna",
+      "scientific_name": "Alstonia scholaris",
+      "icon": "🌿",
+      "uses": [
+        "Traditional bark-based preparations",
+        "Shade and timber"
+      ],
+      "benefits": "Traditionally valued for Traditional bark-based preparations, Shade and timber. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A tropical evergreen tree; sun to partial shade and well-drained soil.",
+      "leaf_features": {
+        "shape": "Oblong leaves",
+        "arrangement": "Whorls, often of 4–8"
+      },
+      "medicine_properties": "Bark appears in traditional formulations; the tree is also planted for shade and timber.",
+      "parts_commonly_used": [
+        "Bark and leaves"
+      ]
+    },
+    {
+      "id": "karanja",
+      "name": "Karanja",
+      "scientific_name": "Pongamia pinnata",
+      "icon": "🌿",
+      "uses": [
+        "Traditional external preparations",
+        "Biofuel and agricultural uses"
+      ],
+      "benefits": "Traditionally valued for Traditional external preparations, Biofuel and agricultural uses. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A hardy tropical tree; full sun and well-drained soil.",
+      "leaf_features": {
+        "shape": "Pinnate leaves with broad leaflets",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Seed oil has traditional external and agricultural uses; raw seeds and oil are not for casual ingestion.",
+      "parts_commonly_used": [
+        "Seed oil, seeds, bark and leaves"
+      ],
+      "note": "Seed products may be toxic if swallowed; use only properly prepared products."
+    },
+    {
+      "id": "bakul",
+      "name": "Bakul",
+      "scientific_name": "Mimusops elengi",
+      "icon": "🌿",
+      "uses": [
+        "Traditional oral-care preparations",
+        "Fragrant flowers and shade"
+      ],
+      "benefits": "Traditionally valued for Traditional oral-care preparations, Fragrant flowers and shade. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A slow-growing tropical evergreen; sun to partial shade and well-drained soil.",
+      "leaf_features": {
+        "shape": "Glossy elliptic leaves",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Flowers and bark are used in traditional oral-care and aromatic preparations; the tree is also ornamental.",
+      "parts_commonly_used": [
+        "Flowers, bark, fruit and seeds"
+      ]
+    },
+    {
+      "id": "amaltas",
+      "name": "Amaltas",
+      "scientific_name": "Cassia fistula",
+      "icon": "🌿",
+      "uses": [
+        "Traditional preparations",
+        "Ornamental flowering tree"
+      ],
+      "benefits": "Traditionally valued for Traditional preparations, Ornamental flowering tree. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A tropical deciduous tree; full sun and well-drained soil.",
+      "leaf_features": {
+        "shape": "Pinnate leaves with paired oval leaflets",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Pulp and other parts appear in traditional preparations; the tree is also ornamental.",
+      "parts_commonly_used": [
+        "Fruit pulp, leaves, bark and flowers"
+      ],
+      "note": "Fruit preparations can have laxative effects; avoid unsupervised dosing."
+    },
+    {
+      "id": "palash",
+      "name": "Palash",
+      "scientific_name": "Butea monosperma",
+      "icon": "🌿",
+      "uses": [
+        "Natural dye",
+        "Traditional preparations",
+        "Ornamental tree"
+      ],
+      "benefits": "Traditionally valued for Natural dye, Traditional preparations, Ornamental tree. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A drought-tolerant tropical tree; full sun and well-drained soil.",
+      "leaf_features": {
+        "shape": "Three broad leaflets",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Flowers, seeds and gum are used in traditional preparations; flowers also provide natural dye.",
+      "parts_commonly_used": [
+        "Flowers, seeds, gum, bark and leaves"
+      ]
+    },
+    {
+      "id": "khadira",
+      "name": "Khadira",
+      "scientific_name": "Acacia catechu",
+      "icon": "🌿",
+      "uses": [
+        "Traditional astringent preparations",
+        "Catechu and dye"
+      ],
+      "benefits": "Traditionally valued for Traditional astringent preparations, Catechu and dye. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A dry-tropical tree; full sun and well-drained soil.",
+      "leaf_features": {
+        "shape": "Bipinnate leaves with many small leaflets",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Heartwood and bark are used in traditional astringent preparations and for catechu dye/extract.",
+      "parts_commonly_used": [
+        "Heartwood and bark"
+      ]
+    },
+    {
+      "id": "shirish",
+      "name": "Shirish",
+      "scientific_name": "Albizia lebbeck",
+      "icon": "🌿",
+      "uses": [
+        "Traditional formulations",
+        "Shade and timber"
+      ],
+      "benefits": "Traditionally valued for Traditional formulations, Shade and timber. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A tropical tree; full sun and well-drained soil.",
+      "leaf_features": {
+        "shape": "Bipinnate leaves with many leaflets",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Bark, seeds and flowers appear in traditional formulations; also grown as a shade tree.",
+      "parts_commonly_used": [
+        "Bark, seeds, flowers and leaves"
+      ]
+    },
+    {
+      "id": "jamun",
+      "name": "Jamun",
+      "scientific_name": "Syzygium cumini",
+      "icon": "🌿",
+      "uses": [
+        "Edible fruit",
+        "Traditional seed and bark preparations"
+      ],
+      "benefits": "Traditionally valued for Edible fruit, Traditional seed and bark preparations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A tropical tree that prefers warm conditions and moist, well-drained soil.",
+      "leaf_features": {
+        "shape": "Oblong, glossy leaves",
+        "arrangement": "Opposite"
+      },
+      "medicine_properties": "Fruit is eaten fresh; seeds and bark appear in traditional preparations.",
+      "parts_commonly_used": [
+        "Fruit, seeds, bark and leaves"
+      ]
+    },
+    {
+      "id": "aparajita",
+      "name": "Aparajita",
+      "scientific_name": "Clitoria ternatea",
+      "icon": "🌿",
+      "uses": [
+        "Natural food colouring",
+        "Ornamental climber",
+        "Traditional preparations"
+      ],
+      "benefits": "Traditionally valued for Natural food colouring, Ornamental climber, Traditional preparations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A warm-season climber; support, sun and well-drained soil.",
+      "leaf_features": {
+        "shape": "Pinnate leaves with 5–7 leaflets",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Flowers are used for natural blue food colouring and in traditional preparations; seeds are not food.",
+      "parts_commonly_used": [
+        "Flowers, roots and seeds"
+      ],
+      "note": "Do not assume all plant parts are safe to eat; use food-grade flowers only."
+    },
+    {
+      "id": "durva",
+      "name": "Durva",
+      "scientific_name": "Cynodon dactylon",
+      "icon": "🌿",
+      "uses": [
+        "Ritual and cultural use",
+        "Groundcover and erosion control"
+      ],
+      "benefits": "Traditionally valued for Ritual and cultural use, Groundcover and erosion control. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A highly resilient lawn grass; full sun and regular moisture while establishing.",
+      "leaf_features": {
+        "shape": "Fine linear blades",
+        "arrangement": "Two-ranked shoots"
+      },
+      "medicine_properties": "The grass is used in cultural and ritual settings; traditional topical uses are reported.",
+      "parts_commonly_used": [
+        "Whole grass",
+        "aerial parts"
+      ]
+    },
+    {
+      "id": "bhumyamalaki",
+      "name": "Bhumyamalaki",
+      "scientific_name": "Phyllanthus niruri",
+      "icon": "🌿",
+      "uses": [
+        "Traditional whole-plant preparations"
+      ],
+      "benefits": "Traditionally valued for Traditional whole-plant preparations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A warm-season annual; partial sun and moist, well-drained soil.",
+      "leaf_features": {
+        "shape": "Small elliptic leaves",
+        "arrangement": "Alternate on flattened branchlets"
+      },
+      "medicine_properties": "Whole plant appears in traditional formulations associated with liver and urinary health; efficacy is not established here.",
+      "parts_commonly_used": [
+        "Whole plant"
+      ],
+      "note": "Several Phyllanthus species share common names; confirm botanical identity."
+    },
+    {
+      "id": "makoy",
+      "name": "Makoy",
+      "scientific_name": "Solanum nigrum",
+      "icon": "🌿",
+      "uses": [
+        "Ripe fruit food in some regions",
+        "Traditional preparations"
+      ],
+      "benefits": "Traditionally valued for Ripe fruit food in some regions, Traditional preparations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A short-lived herb; sun and moist, well-drained soil.",
+      "leaf_features": {
+        "shape": "Ovate leaves with wavy margins",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Ripe berries are used as food in some traditions; unripe berries and leaves may contain toxic alkaloids.",
+      "parts_commonly_used": [
+        "Ripe fruit",
+        "leaves and whole plant in traditional systems"
+      ],
+      "note": "Avoid unripe berries and unsupervised use; toxicity varies by species and plant part."
+    },
+    {
+      "id": "kulanjan",
+      "name": "Kulanjan",
+      "scientific_name": "Alpinia galanga",
+      "icon": "🌿",
+      "uses": [
+        "Food spice",
+        "Traditional aromatic preparations"
+      ],
+      "benefits": "Traditionally valued for Food spice, Traditional aromatic preparations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A tropical ginger relative; warm humid climate, partial shade and moist rich soil.",
+      "leaf_features": {
+        "shape": "Long lance-shaped leaves",
+        "arrangement": "Alternate in two ranks"
+      },
+      "medicine_properties": "Rhizome is an aromatic spice and traditional ingredient, often used for digestive comfort.",
+      "parts_commonly_used": [
+        "Rhizome"
+      ]
+    },
+    {
+      "id": "nagarmotha",
+      "name": "Nagarmotha",
+      "scientific_name": "Cyperus scariosus",
+      "icon": "🌿",
+      "uses": [
+        "Traditional aromatic formulations",
+        "Perfumery"
+      ],
+      "benefits": "Traditionally valued for Traditional aromatic formulations, Perfumery. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A sedge suited to warm climates; sun and moist soil.",
+      "leaf_features": {
+        "shape": "Narrow grass-like leaves",
+        "arrangement": "Three-ranked basal leaves"
+      },
+      "medicine_properties": "Rhizome is aromatic and used in traditional perfumery and formulations.",
+      "parts_commonly_used": [
+        "Rhizome and roots"
+      ],
+      "note": "The common name may refer to related Cyperus species; verify identity."
+    },
+    {
+      "id": "kaladana",
+      "name": "Kaladana",
+      "scientific_name": "Ipomoea turpethum",
+      "icon": "🌿",
+      "uses": [
+        "Traditional formulations under qualified supervision"
+      ],
+      "benefits": "Traditionally valued for Traditional formulations under qualified supervision. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A tropical climbing plant; full sun to partial shade and support.",
+      "leaf_features": {
+        "shape": "Heart-shaped leaves",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Seeds are associated with purgative traditional preparations but can be unsafe without expert processing.",
+      "parts_commonly_used": [
+        "Seeds and root"
+      ],
+      "note": "Potentially strong purgative; avoid self-medication."
+    },
+    {
+      "id": "shal",
+      "name": "Shal",
+      "scientific_name": "Shorea robusta",
+      "icon": "🌿",
+      "uses": [
+        "Resin and timber",
+        "Traditional preparations"
+      ],
+      "benefits": "Traditionally valued for Resin and timber, Traditional preparations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A large tree of warm monsoon forests; deep soil and seasonal rainfall.",
+      "leaf_features": {
+        "shape": "Broad elliptic leaves",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Resin and bark have traditional and industrial uses; the tree has major ecological and cultural value.",
+      "parts_commonly_used": [
+        "Resin, bark and leaves"
+      ],
+      "note": "Use traceable material; avoid unsustainable wild collection."
+    },
+    {
+      "id": "devadaru",
+      "name": "Devadaru",
+      "scientific_name": "Cedrus deodara",
+      "icon": "🌿",
+      "uses": [
+        "Traditional aromatic preparations",
+        "Timber"
+      ],
+      "benefits": "Traditionally valued for Traditional aromatic preparations, Timber. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A Himalayan conifer; cool climate, full sun and well-drained mountain soil.",
+      "leaf_features": {
+        "shape": "Needle-like leaves in dense clusters",
+        "arrangement": "Spiral on long shoots"
+      },
+      "medicine_properties": "Wood and oil are used in traditional aromatic preparations and for timber.",
+      "parts_commonly_used": [
+        "Wood, heartwood oil and bark"
+      ]
+    },
+    {
+      "id": "agaru",
+      "name": "Agaru",
+      "scientific_name": "Aquilaria malaccensis",
+      "icon": "🌿",
+      "uses": [
+        "Incense and perfumery",
+        "Cultural use"
+      ],
+      "benefits": "Traditionally valued for Incense and perfumery, Cultural use. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A tropical evergreen forest tree; warm humid climate and partial shade when young.",
+      "leaf_features": {
+        "shape": "Elliptic leaves",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Resinous heartwood is valued for incense and perfumery; formation is limited and trade is regulated.",
+      "parts_commonly_used": [
+        "Resinous heartwood"
+      ],
+      "note": "Agarwood trade is regulated; use legal, sustainably sourced products."
+    },
+    {
+      "id": "bhojpatra",
+      "name": "Bhojpatra",
+      "scientific_name": "Betula utilis",
+      "icon": "🌿",
+      "uses": [
+        "Traditional writing material",
+        "Cultural and conservation value"
+      ],
+      "benefits": "Traditionally valued for Traditional writing material, Cultural and conservation value. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A high-altitude Himalayan tree; cool climate and well-drained mountain soils.",
+      "leaf_features": {
+        "shape": "Triangular to ovate leaves with toothed margins",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Bark has historical writing and craft uses; plant use is mainly cultural, not a proven remedy.",
+      "parts_commonly_used": [
+        "Bark"
+      ],
+      "note": "Do not strip bark from wild trees; this species is ecologically important."
+    },
+    {
+      "id": "daruhaldi",
+      "name": "Daruhaldi",
+      "scientific_name": "Berberis aristata",
+      "icon": "🌿",
+      "uses": [
+        "Traditional topical and internal formulations"
+      ],
+      "benefits": "Traditionally valued for Traditional topical and internal formulations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A cool to temperate thorny shrub; sun and well-drained soil.",
+      "leaf_features": {
+        "shape": "Oval leaves with spiny margins",
+        "arrangement": "Clustered on short shoots"
+      },
+      "medicine_properties": "Stem and root tissues are used in traditional preparations; berberine-containing plants can interact with medicines.",
+      "parts_commonly_used": [
+        "Stem, root and wood"
+      ],
+      "note": "Same botanical species as Daruharidra in this list; may interact with medicines."
+    },
+    {
+      "id": "kutaja",
+      "name": "Kutaja",
+      "scientific_name": "Holarrhena pubescens",
+      "icon": "🌿",
+      "uses": [
+        "Traditional bark and seed formulations"
+      ],
+      "benefits": "Traditionally valued for Traditional bark and seed formulations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A tropical shrub or small tree; sun and well-drained soil.",
+      "leaf_features": {
+        "shape": "Elliptic to oblong leaves",
+        "arrangement": "Opposite"
+      },
+      "medicine_properties": "Bark and seeds appear in traditional digestive formulations; these are not self-treatment advice.",
+      "parts_commonly_used": [
+        "Bark and seeds"
+      ]
+    },
+    {
+      "id": "mustak",
+      "name": "Mustak",
+      "scientific_name": "Cyperus rotundus",
+      "icon": "🌿",
+      "uses": [
+        "Traditional digestive and aromatic preparations"
+      ],
+      "benefits": "Traditionally valued for Traditional digestive and aromatic preparations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A hardy sedge; sunny site and moist soil; spreads by underground rhizomes.",
+      "leaf_features": {
+        "shape": "Narrow grass-like leaves",
+        "arrangement": "Three-ranked basal leaves"
+      },
+      "medicine_properties": "Rhizome is aromatic and used in traditional digestive preparations.",
+      "parts_commonly_used": [
+        "Rhizome"
+      ],
+      "note": "Same species as Musta in this list."
+    },
+    {
+      "id": "rohitaka",
+      "name": "Rohitaka",
+      "scientific_name": "Tecomella undulata",
+      "icon": "🌿",
+      "uses": [
+        "Traditional bark-based preparations"
+      ],
+      "benefits": "Traditionally valued for Traditional bark-based preparations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A dry-region tree; full sun and well-drained soil.",
+      "leaf_features": {
+        "shape": "Pinnate leaves with small leaflets",
+        "arrangement": "Opposite or sub-opposite"
+      },
+      "medicine_properties": "Bark is used in traditional formulations; regional identity and use should be checked against authoritative sources.",
+      "parts_commonly_used": [
+        "Bark and seeds"
+      ]
+    },
+    {
+      "id": "palash-2",
+      "name": "Palash",
+      "scientific_name": "Butea monosperma",
+      "icon": "🌿",
+      "uses": [
+        "Natural dye",
+        "Traditional preparations",
+        "Ornamental tree"
+      ],
+      "benefits": "Traditionally valued for Natural dye, Traditional preparations, Ornamental tree. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A drought-tolerant tropical tree; full sun and well-drained soil.",
+      "leaf_features": {
+        "shape": "Three broad leaflets",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Flowers, seeds and gum are used in traditional preparations; flowers also provide natural dye.",
+      "parts_commonly_used": [
+        "Flowers, seeds, gum, bark and leaves"
+      ]
+    },
+    {
+      "id": "shalmali",
+      "name": "Shalmali",
+      "scientific_name": "Bombax ceiba",
+      "icon": "🌿",
+      "uses": [
+        "Gum and fibre",
+        "Traditional preparations"
+      ],
+      "benefits": "Traditionally valued for Gum and fibre, Traditional preparations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A large tropical tree; full sun and well-drained soil.",
+      "leaf_features": {
+        "shape": "Palmately compound leaves with 5–7 leaflets",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Gum and other parts have traditional uses; the tree is also valued for fibre and habitat.",
+      "parts_commonly_used": [
+        "Gum, bark, flowers and roots"
+      ]
+    },
+    {
+      "id": "aralu",
+      "name": "Aralu",
+      "scientific_name": "Ailanthus excelsa",
+      "icon": "🌿",
+      "uses": [
+        "Traditional bark-based preparations",
+        "Timber and shade"
+      ],
+      "benefits": "Traditionally valued for Traditional bark-based preparations, Timber and shade. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A tropical deciduous tree; full sun and well-drained soil.",
+      "leaf_features": {
+        "shape": "Pinnate leaves with numerous leaflets",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Bark and leaves appear in traditional preparations; it is also a timber and shade tree.",
+      "parts_commonly_used": [
+        "Bark, leaves and roots"
+      ]
+    },
+    {
+      "id": "bakayan",
+      "name": "Bakayan",
+      "scientific_name": "Melia azedarach",
+      "icon": "🌿",
+      "uses": [
+        "Traditional external preparations",
+        "Botanical pest-control uses"
+      ],
+      "benefits": "Traditionally valued for Traditional external preparations, Botanical pest-control uses. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A deciduous tree; sun and well-drained soil.",
+      "leaf_features": {
+        "shape": "Pinnate leaves with toothed leaflets",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Leaves, bark and seeds have traditional and pest-control uses; the seeds are not edible.",
+      "parts_commonly_used": [
+        "Leaves, bark and seeds"
+      ],
+      "note": "Seeds and concentrated extracts can be toxic; do not ingest."
+    },
+    {
+      "id": "raktachandan",
+      "name": "Raktachandan",
+      "scientific_name": "Pterocarpus santalinus",
+      "icon": "🌿",
+      "uses": [
+        "Red dye",
+        "Woodcraft and cultural use"
+      ],
+      "benefits": "Traditionally valued for Red dye, Woodcraft and cultural use. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A dry-tropical tree; full sun and well-drained soil.",
+      "leaf_features": {
+        "shape": "Pinnate leaves with rounded leaflets",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Heartwood is prized for dye, carving and cultural uses; medicinal claims require source-specific evidence.",
+      "parts_commonly_used": [
+        "Heartwood"
+      ],
+      "note": "Threatened by overharvesting; choose legal, traceable sources."
+    },
+    {
+      "id": "shatavari-wild",
+      "name": "Shatavari Wild",
+      "scientific_name": "Asparagus adscendens",
+      "icon": "🌿",
+      "uses": [
+        "Traditional root-based formulations"
+      ],
+      "benefits": "Traditionally valued for Traditional root-based formulations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A warm-climate climbing plant; partial shade and moist, well-drained soil.",
+      "leaf_features": {
+        "shape": "Needle-like cladodes; scale-like true leaves",
+        "arrangement": "Cladodes in clusters"
+      },
+      "medicine_properties": "Root is used in traditional formulations; this is a separate species from cultivated Asparagus racemosus.",
+      "parts_commonly_used": [
+        "Tuberous roots"
+      ],
+      "note": "Verify the species: Shatavari and Shatavari Wild are not the same botanical taxon."
+    },
+    {
+      "id": "kusha",
+      "name": "Kusha",
+      "scientific_name": "Desmostachya bipinnata",
+      "icon": "🌿",
+      "uses": [
+        "Ritual and cultural use",
+        "Thatching and soil stabilization"
+      ],
+      "benefits": "Traditionally valued for Ritual and cultural use, Thatching and soil stabilization. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A drought-tolerant grass; full sun and sandy or dry soils.",
+      "leaf_features": {
+        "shape": "Narrow, stiff grass blades",
+        "arrangement": "Dense basal clumps"
+      },
+      "medicine_properties": "Grass is used in cultural and ritual practices and has traditional applications.",
+      "parts_commonly_used": [
+        "Whole grass"
+      ]
+    },
+    {
+      "id": "ikshu",
+      "name": "Ikshu",
+      "scientific_name": "Saccharum officinarum",
+      "icon": "🌿",
+      "uses": [
+        "Sugar and food production",
+        "Traditional beverage"
+      ],
+      "benefits": "Traditionally valued for Sugar and food production, Traditional beverage. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A tropical crop; long warm growing season, sun and abundant water.",
+      "leaf_features": {
+        "shape": "Long linear blades with sharp margins",
+        "arrangement": "Alternate in two ranks"
+      },
+      "medicine_properties": "Sugarcane is primarily a food crop; traditional use does not make raw juice a treatment.",
+      "parts_commonly_used": [
+        "Stalk juice",
+        "leaves and bagasse as by-products"
+      ]
+    },
+    {
+      "id": "priyangu",
+      "name": "Priyangu",
+      "scientific_name": "Callicarpa macrophylla",
+      "icon": "🌿",
+      "uses": [
+        "Traditional aromatic and topical preparations",
+        "Ornamental shrub"
+      ],
+      "benefits": "Traditionally valued for Traditional aromatic and topical preparations, Ornamental shrub. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A warm-climate shrub; sun to partial shade and well-drained soil.",
+      "leaf_features": {
+        "shape": "Elliptic leaves",
+        "arrangement": "Opposite"
+      },
+      "medicine_properties": "Flowers and other parts appear in traditional perfumed and topical preparations; uses vary by region.",
+      "parts_commonly_used": [
+        "Flowers, bark and leaves"
+      ]
+    },
+    {
+      "id": "kumari",
+      "name": "Kumari",
+      "scientific_name": "Aloe barbadensis",
+      "icon": "🌿",
+      "uses": [
+        "Topical skin-care preparations",
+        "Ornamental succulent"
+      ],
+      "benefits": "Traditionally valued for Topical skin-care preparations, Ornamental succulent. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A frost-sensitive succulent; bright sun and sharply drained soil, with sparse watering.",
+      "leaf_features": {
+        "shape": "Fleshy lance-shaped leaves",
+        "arrangement": "Basal rosette",
+        "edge": "Spiny"
+      },
+      "medicine_properties": "Aloe leaf gel has topical skin-care uses; this listed taxon is Aloe barbadensis, commonly treated as Aloe vera.",
+      "parts_commonly_used": [
+        "Leaf gel"
+      ],
+      "note": "Do not ingest aloe latex; verify the product and plant part."
+    },
+    {
+      "id": "karavira",
+      "name": "Karavira",
+      "scientific_name": "Nerium oleander",
+      "icon": "🌿",
+      "uses": [
+        "Ornamental planting only"
+      ],
+      "benefits": "Traditionally valued for Ornamental planting only. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A heat-tolerant shrub; full sun and well-drained soil.",
+      "leaf_features": {
+        "shape": "Narrow lance-shaped leathery leaves",
+        "arrangement": "Whorled"
+      },
+      "medicine_properties": "Ornamental flowering shrub; all parts contain cardiac glycosides and are highly poisonous.",
+      "parts_commonly_used": [
+        "No part is safe for home medicinal use"
+      ],
+      "note": "Highly poisonous if swallowed or burned; keep away from children and pets."
+    },
+    {
+      "id": "dhatura",
+      "name": "Dhatura",
+      "scientific_name": "Datura metel",
+      "icon": "🌿",
+      "uses": [
+        "No home medicinal use recommended"
+      ],
+      "benefits": "Traditionally valued for No home medicinal use recommended. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A warm-climate annual or short-lived shrub; sun and disturbed, well-drained soil.",
+      "leaf_features": {
+        "shape": "Large ovate leaves with irregular teeth",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Traditional use is reported, but tropane alkaloids make the plant highly poisonous and unpredictable.",
+      "parts_commonly_used": [
+        "No part is safe for self-treatment"
+      ],
+      "note": "Highly poisonous; can cause delirium, seizures, coma, or death. Do not ingest or handle for remedies."
+    },
+    {
+      "id": "aak",
+      "name": "Aak",
+      "scientific_name": "Calotropis procera",
+      "icon": "🌿",
+      "uses": [
+        "Traditional external uses only under expert supervision"
+      ],
+      "benefits": "Traditionally valued for Traditional external uses only under expert supervision. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A drought-tolerant tropical shrub; full sun and very well-drained soil.",
+      "leaf_features": {
+        "shape": "Large opposite, oblong leaves",
+        "arrangement": "Opposite"
+      },
+      "medicine_properties": "Latex and other parts are reported in traditional use but are caustic and potentially poisonous.",
+      "parts_commonly_used": [
+        "Leaves, roots, flowers and latex"
+      ],
+      "note": "Latex can injure eyes and skin and is toxic if swallowed."
+    },
+    {
+      "id": "kachnar",
+      "name": "Kachnar",
+      "scientific_name": "Bauhinia variegata",
+      "icon": "🌿",
+      "uses": [
+        "Food preparations from buds/flowers",
+        "Traditional formulations"
+      ],
+      "benefits": "Traditionally valued for Food preparations from buds/flowers, Traditional formulations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A warm-climate tree; full sun and well-drained soil.",
+      "leaf_features": {
+        "shape": "Distinctively bilobed leaves",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Bark, buds and flowers have traditional uses; flower buds are also eaten in some cuisines.",
+      "parts_commonly_used": [
+        "Bark, flower buds, flowers and leaves"
+      ]
+    },
+    {
+      "id": "varuna",
+      "name": "Varuna",
+      "scientific_name": "Crataeva nurvala",
+      "icon": "🌿",
+      "uses": [
+        "Traditional bark-based formulations"
+      ],
+      "benefits": "Traditionally valued for Traditional bark-based formulations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A tropical tree, often near water; sun and moist, well-drained soil.",
+      "leaf_features": {
+        "shape": "Trifoliate leaves with broad leaflets",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Bark is used in traditional urinary and stone-related formulations; efficacy and safety require clinical assessment.",
+      "parts_commonly_used": [
+        "Bark, leaves and roots"
+      ],
+      "note": "Do not use for urinary or kidney conditions instead of medical evaluation."
+    },
+    {
+      "id": "rohini",
+      "name": "Rohini",
+      "scientific_name": "Soymida febrifuga",
+      "icon": "🌿",
+      "uses": [
+        "Traditional bark-based preparations"
+      ],
+      "benefits": "Traditionally valued for Traditional bark-based preparations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A tropical deciduous tree; full sun and well-drained soil.",
+      "leaf_features": {
+        "shape": "Pinnate leaves with several leaflets",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Bark is used in traditional formulations; verify identity because vernacular names vary.",
+      "parts_commonly_used": [
+        "Bark"
+      ],
+      "note": "Check the scientific name; Rohini can refer to different plants."
+    },
+    {
+      "id": "neem-bark-tree",
+      "name": "Neem Bark Tree",
+      "scientific_name": "Melia dubia",
+      "icon": "🌿",
+      "uses": [
+        "Timber, plywood and shade",
+        "Not interchangeable with neem"
+      ],
+      "benefits": "Traditionally valued for Timber, plywood and shade, Not interchangeable with neem. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A fast-growing tropical tree; sun, rainfall and deep well-drained soil.",
+      "leaf_features": {
+        "shape": "Large pinnate leaves with toothed leaflets",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "A fast-growing timber tree; the supplied name is Neem Bark Tree, but it is Melia dubia, not neem (Azadirachta indica).",
+      "parts_commonly_used": [
+        "Wood and leaves"
+      ],
+      "note": "Different species from true neem; do not transfer neem medicinal claims to this plant."
+    },
+    {
+      "id": "pomegranate",
+      "name": "Pomegranate",
+      "scientific_name": "Punica granatum",
+      "icon": "🌿",
+      "uses": [
+        "Fresh fruit and juice",
+        "Traditional food preparations"
+      ],
+      "benefits": "Traditionally valued for Fresh fruit and juice, Traditional food preparations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A warm, sunny site; tolerates dry periods once established and needs well-drained soil.",
+      "leaf_features": {
+        "shape": "Narrow oblong leaves",
+        "arrangement": "Opposite or in clusters"
+      },
+      "medicine_properties": "Fruit is a food; peel and other parts appear in traditional preparations, but concentrated extracts can interact with medicines.",
+      "parts_commonly_used": [
+        "Fruit arils and peel"
+      ]
+    },
+    {
+      "id": "guava",
+      "name": "Guava",
+      "scientific_name": "Psidium guajava",
+      "icon": "🌿",
+      "uses": [
+        "Edible fruit",
+        "Traditional leaf preparations"
+      ],
+      "benefits": "Traditionally valued for Edible fruit, Traditional leaf preparations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A warm-climate fruit tree; full sun, regular water and well-drained soil.",
+      "leaf_features": {
+        "shape": "Elliptic leaves with prominent veins",
+        "arrangement": "Opposite"
+      },
+      "medicine_properties": "Fruit and leaves are used as food; leaves appear in traditional preparations for digestive comfort.",
+      "parts_commonly_used": [
+        "Fruit and leaves"
+      ]
+    },
+    {
+      "id": "lemon",
+      "name": "Lemon",
+      "scientific_name": "Citrus limon",
+      "icon": "🌿",
+      "uses": [
+        "Food, juice and flavoring",
+        "Household uses"
+      ],
+      "benefits": "Traditionally valued for Food, juice and flavoring, Household uses. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A frost-sensitive citrus tree; full sun, regular water and well-drained soil.",
+      "leaf_features": {
+        "shape": "Oval leaves, often with winged petioles",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Fruit is a food and flavoring; traditional uses do not replace treatment for illness.",
+      "parts_commonly_used": [
+        "Fruit, peel and leaves"
+      ]
+    },
+    {
+      "id": "curry-leaf",
+      "name": "Curry Leaf",
+      "scientific_name": "Murraya koenigii",
+      "icon": "🌿",
+      "uses": [
+        "Food seasoning",
+        "Traditional culinary preparations"
+      ],
+      "benefits": "Traditionally valued for Food seasoning, Traditional culinary preparations. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A warm-climate shrub or small tree; sun to partial shade and well-drained soil.",
+      "leaf_features": {
+        "shape": "Pinnate leaves with aromatic leaflets",
+        "arrangement": "Alternate"
+      },
+      "medicine_properties": "Leaves are widely used as a culinary herb and in traditional food preparations.",
+      "parts_commonly_used": [
+        "Leaves",
+        "berries are not commonly used as food"
+      ]
+    },
+    {
+      "id": "lemongrass",
+      "name": "Lemongrass",
+      "scientific_name": "Cymbopogon citratus",
+      "icon": "🌿",
+      "uses": [
+        "Tea and food flavoring",
+        "Aromatic oil"
+      ],
+      "benefits": "Traditionally valued for Tea and food flavoring, Aromatic oil. These traditional uses are not proof of treatment effectiveness.",
+      "growing": "A warm-season grass; full sun, fertile soil and regular moisture.",
+      "leaf_features": {
+        "shape": "Long narrow aromatic blades",
+        "arrangement": "Dense clumps"
+      },
+      "medicine_properties": "Leaves are used for culinary flavor and herbal tea; traditional uses are not medical treatment.",
+      "parts_commonly_used": [
+        "Leaves and stalks"
+      ]
+    },
+    {
+      "id": "tulsi",
+      "name": "Tulsi (Holy Basil)",
+      "scientific_name": "Ocimum tenuiflorum",
+      "icon": "🌿",
+      "uses": [
+        "Boosts immunity",
+        "Relieves stress",
+        "Improves respiratory health",
+        "Anti-inflammatory"
+      ],
+      "benefits": "Tulsi is a medicinal herb traditionally used in Ayurveda.",
+      "growing": "Grows well in warm and sunny locations with good drainage.",
+      "leaf_features": {
+        "color": "Green to purple-green",
+        "shape": "Oval with serrated edges",
+        "arrangement": "Opposite"
+      }
+    },
+    {
+      "id": "amruthaballi",
+      "name": "Amruthaballi (Guduchi/Giloy)",
+      "scientific_name": "Tinospora cordifolia",
+      "plant_family": "Menispermaceae",
+      "icon": "🌿",
+      "medicine_properties": "Traditionally associated with anti-inflammatory, antioxidant, immunomodulatory and hepatoprotective properties.",
+      "uses": [
+        "Fever",
+        "General weakness",
+        "Digestive complaints",
+        "Inflammatory conditions"
+      ],
+      "benefits": "Traditionally used in Ayurveda and other Indian systems for fever, general weakness, digestive complaints and inflammatory conditions.",
+      "description": "A perennial climbing shrub with succulent stems, heart-shaped leaves and aerial roots. It is commonly known as Guduchi/Giloy.",
+      "parts_commonly_used": [
+        "Stem",
+        "Leaves"
+      ],
+      "growing": "A climbing shrub; provide support and suitable warm growing conditions."
+    },
+    {
+      "id": "ashoka",
+      "name": "Ashoka",
+      "scientific_name": "Saraca asoca",
+      "plant_family": "Fabaceae",
+      "icon": "🌳",
+      "medicine_properties": "Traditionally associated with astringent, anti-inflammatory and uterine-supportive properties.",
+      "uses": [
+        "Ayurvedic formulations",
+        "Women's reproductive health",
+        "Menstrual health"
+      ],
+      "benefits": "Traditionally used in Ayurveda, particularly in formulations associated with women's reproductive and menstrual health.",
+      "description": "A medium-sized evergreen tree with dense foliage and clusters of orange-red flowers.",
+      "parts_commonly_used": [
+        "Bark",
+        "Stem bark"
+      ],
+      "note": "The common name Ashoka can refer to more than one plant in medicinal sources; always use the scientific name with this record.",
+      "growing": "An evergreen tree suited to a warm, tropical climate."
+    },
+    {
+      "id": "asthma-weed",
+      "name": "Asthma Weed",
+      "scientific_name": "Euphorbia hirta L.",
+      "plant_family": "Euphorbiaceae",
+      "icon": "🍀",
+      "medicine_properties": "Traditionally associated with antiasthmatic, anti-inflammatory, antimicrobial and antihistaminic activities; research has investigated several of these properties.",
+      "uses": [
+        "Cough",
+        "Bronchitis",
+        "Asthma",
+        "Digestive complaints"
+      ],
+      "benefits": "Traditionally used for cough, bronchitis, asthma and certain digestive complaints in different traditional medicine systems.",
+      "description": "A small hairy annual herb with branched stems, opposite leaves and milky latex.",
+      "parts_commonly_used": [
+        "Leaves",
+        "Aerial parts",
+        "Whole plant"
+      ],
+      "growing": "An annual herb commonly found in warm conditions."
+    },
+    {
+      "id": "balloon-vine",
+      "name": "Balloon Vine",
+      "scientific_name": "Cardiospermum halicacabum L.",
+      "plant_family": "Sapindaceae",
+      "icon": "🌱",
+      "medicine_properties": "Traditionally associated with anti-inflammatory, analgesic and antiallergic properties.",
+      "uses": [
+        "Joint pain",
+        "Rheumatic complaints",
+        "Skin problems",
+        "Inflammatory conditions"
+      ],
+      "benefits": "Traditionally used for joint pain, rheumatic complaints, skin problems and inflammatory conditions.",
+      "description": "A delicate climbing herb with divided leaves, small white flowers and distinctive inflated, balloon-like seed capsules.",
+      "parts_commonly_used": [
+        "Leaves",
+        "Roots",
+        "Seeds",
+        "Whole plant"
+      ],
+      "growing": "A climbing herb that benefits from support for its vines."
+    },
+    {
+      "id": "betel",
+      "name": "Betel",
+      "scientific_name": "Piper betle ",
+      "plant_family": "Piperaceae",
+      "icon": "🍃",
+      "medicine_properties": "Traditionally associated with antimicrobial, antioxidant, digestive and anti-inflammatory properties.",
+      "uses": [
+        "Betel leaf (paan)",
+        "Digestive preparations",
+        "Oral-related traditional preparations"
+      ],
+      "benefits": "Traditionally used as betel leaf (paan), and in various traditional preparations for digestive and oral-related purposes.",
+      "description": "A perennial evergreen climbing vine with glossy, heart-shaped leaves and slender spikes of flowers.",
+      "parts_commonly_used": [
+        "Leaves",
+        "Leaf essential oil",
+        "Fruit"
+      ],
+      "growing": "A perennial climbing vine that prefers warm, humid conditions and support."
+    },
+    {
+      "id": "brahmi",
+      "name": "Brahmi",
+      "scientific_name": "Bacopa monnieri",
+      "plant_family": "Plantaginaceae",
+      "icon": "🌿",
+      "medicine_properties": "Traditionally associated with cognitive-supportive, antioxidant and neuroprotective properties.",
+      "uses": [
+        "Memory",
+        "Learning",
+        "Concentration",
+        "Nervous-system support"
+      ],
+      "benefits": "Traditionally used in Ayurveda for memory, learning, concentration and general nervous-system support.",
+      "description": "A small creeping, succulent herb commonly found in wet or marshy areas. It has small fleshy leaves and delicate white flowers.",
+      "parts_commonly_used": [
+        "Whole plant"
+      ],
+      "growing": "A creeping herb that commonly grows in wet or marshy areas."
+    },
+    {
+      "id": "bhringraj",
+      "name": "Bringaraja (Bhringraj)",
+      "scientific_name": "Eclipta prostrata",
+      "plant_family": "Asteraceae",
+      "icon": "🌿",
+      "medicine_properties": "Traditionally associated with hepatoprotective, anti-inflammatory, antioxidant and hair-care-related properties.",
+      "uses": [
+        "Hair care",
+        "Liver-health preparations",
+        "Skin-health preparations"
+      ],
+      "benefits": "Traditionally used in Ayurveda for hair care and in preparations associated with liver and skin health.",
+      "description": "A small annual herb that can grow erect or prostrate, with opposite leaves and small white flower heads. It commonly grows in moist areas and fields.",
+      "parts_commonly_used": [
+        "Whole plant",
+        "Aerial parts",
+        "Leaves",
+        "Roots"
+      ],
+      "growing": "An annual herb commonly found in moist areas and fields."
+    },
+    {
+      "id": "caricature-plant",
+      "name": "Caricature Plant",
+      "scientific_name": "Graptophyllum pictum",
+      "plant_family": "Acanthaceae",
+      "icon": "🌿",
+      "medicine_properties": "Traditionally associated with anti-inflammatory and analgesic properties.",
+      "uses": [
+        "Traditional preparations for inflammatory conditions",
+        "Traditional preparations for other ailments"
+      ],
+      "benefits": "Reported in some Southeast Asian medicinal practices for inflammatory and other ailments.",
+      "description": "An evergreen shrub with large, attractive leaves that may have purple, green or variegated patterns. It is also widely grown as an ornamental plant.",
+      "parts_commonly_used": [
+        "Leaves",
+        "Aerial parts"
+      ],
+      "growing": "An evergreen shrub also widely grown as an ornamental plant."
+    },
+    {
+      "id": "catharanthus",
+      "name": "Catharanthus (Madagascar Periwinkle)",
+      "scientific_name": "Catharanthus roseus (L.) G.Don",
+      "plant_family": "Apocynaceae",
+      "icon": "🌸",
+      "medicine_properties": "Contains important alkaloids, including vincristine and vinblastine, which have established pharmaceutical importance in cancer treatment.",
+      "uses": [
+        "Folk-medicine preparations for diabetes",
+        "Folk-medicine preparations for other ailments"
+      ],
+      "benefits": "Used in various folk-medicine practices. Compounds derived from this plant are used in modern anticancer medicines; it is not a self-treatment for cancer.",
+      "description": "A small evergreen herb or shrub with glossy opposite leaves and characteristic pink, purple or white flowers.",
+      "parts_commonly_used": [
+        "Leaves",
+        "Aerial parts"
+      ],
+      "growing": "A small evergreen herb or shrub."
+    },
+    {
+      "id": "drumstick",
+      "name": "Drumstick (Moringa)",
+      "scientific_name": "Moringa oleifera Lam.",
+      "plant_family": "Moringaceae",
+      "icon": "🌳",
+      "medicine_properties": "Associated with antioxidant, anti-inflammatory and nutritional properties; various plant parts have been investigated pharmacologically.",
+      "uses": [
+        "Food",
+        "Nutritional support",
+        "Traditional preparations for common ailments"
+      ],
+      "benefits": "Traditionally used as a food and in traditional medicine for nutritional support and various common ailments.",
+      "description": "A fast-growing small-to-medium tree with compound leaves, fragrant flowers and long slender seed pods commonly called drumsticks.",
+      "parts_commonly_used": [
+        "Leaves",
+        "Seeds",
+        "Bark"
+      ],
+      "growing": "A fast-growing small-to-medium tree."
+    },
+    {
+      "id": "insulin-plant",
+      "name": "Insulin Plant",
+      "scientific_name": "Costus igneus Nak.",
+      "plant_family": "Costaceae",
+      "icon": "🌿",
+      "medicine_properties": "Traditionally associated particularly with blood-glucose-lowering and antidiabetic potential.",
+      "uses": [
+        "Leaves traditionally consumed in herbal preparations associated with diabetes management"
+      ],
+      "benefits": "In India, the leaves have traditionally been consumed in herbal preparations associated with diabetes management. This should not replace prescribed diabetes care.",
+      "description": "A perennial ornamental herb with spirally arranged leaves and reddish-orange flowers. It is also known as fiery costus and spiral flag.",
+      "parts_commonly_used": [
+        "Leaves"
+      ],
+      "growing": "A perennial ornamental herb."
+    },
+    {
+      "id": "kamakasturi",
+      "name": "Kamakasturi",
+      "scientific_name": "Ocimum basilicum",
+      "plant_family": "Lamiaceae",
+      "icon": "🌿",
+      "medicine_properties": "Traditionally associated with antioxidant, antimicrobial, digestive and anti-inflammatory properties.",
+      "uses": [
+        "Aromatic herb",
+        "Digestive preparations",
+        "Respiratory preparations",
+        "General wellness"
+      ],
+      "benefits": "Traditionally used as an aromatic herb and in preparations for digestive, respiratory and general wellness purposes.",
+      "description": "An aromatic annual herb with soft green leaves, square stems and small flowers arranged in spikes.",
+      "parts_commonly_used": [
+        "Leaves",
+        "Seeds"
+      ],
+      "growing": "An aromatic annual herb.",
+      "note": "Kew's medicinal-plant database associates the name Kamakasturi with Ocimum basilicum."
+    },
+    {
+      "id": "kohlrabi",
+      "name": "Kohlrabi",
+      "scientific_name": "Brassica oleracea",
+      "plant_family": "Brassicaceae",
+      "icon": "🥬",
+      "medicine_properties": "Nutritional rather than primarily medicinal; provides vitamin C, dietary fiber and various phytochemicals.",
+      "uses": [
+        "Vegetable food"
+      ],
+      "benefits": "Mainly consumed as a vegetable; the swollen stem and leaves are used as food.",
+      "description": "A cool-season vegetable belonging to the cabbage family. Its characteristic edible swollen stem develops above the ground.",
+      "parts_commonly_used": [],
+      "growing": "A cool-season cultivated vegetable.",
+      "note": "No specific part is traditionally established as a medicinal drug. Kohlrabi is a cultivated vegetable, not normally classified as a major medicinal plant."
+    },
+    {
+      "id": "malabar-nut",
+      "name": "Malabar Nut",
+      "scientific_name": "Justicia adhatoda",
+      "plant_family": "Acanthaceae",
+      "icon": "🌿",
+      "medicine_properties": "Traditionally associated with expectorant, bronchodilatory, anti-inflammatory and antimicrobial properties.",
+      "uses": [
+        "Cough",
+        "Bronchitis",
+        "Asthma",
+        "Respiratory complaints"
+      ],
+      "benefits": "Traditionally used for cough, bronchitis, asthma and other respiratory complaints in Ayurvedic and folk medicine.",
+      "description": "An evergreen shrub with lance-shaped leaves and white flowers marked with purple or red streaks.",
+      "parts_commonly_used": [
+        "Leaves",
+        "Roots"
+      ],
+      "growing": "An evergreen shrub."
+    },
+    {
+      "id": "nelavembu",
+      "name": "Nelavembu",
+      "scientific_name": "Andrographis paniculata (Burm.f.)",
+      "plant_family": "Acanthaceae",
+      "icon": "🌿",
+      "medicine_properties": "Traditionally associated with anti-inflammatory, antioxidant, antimicrobial and hepatoprotective properties.",
+      "uses": [
+        "Fever",
+        "Digestive complaints",
+        "Inflammatory conditions"
+      ],
+      "benefits": "Traditionally used in Ayurveda and Siddha medicine for fever, digestive complaints and various inflammatory conditions.",
+      "description": "A small annual herb with an erect, branched stem, narrow lance-shaped leaves and small white flowers with purple markings.",
+      "parts_commonly_used": [
+        "Whole plant",
+        "Aerial parts"
+      ],
+      "growing": "A small annual herb."
+    },
+    {
+      "id": "arive-dantu",
+      "name": "Arive Dantu (Green Amaranth)",
+      "scientific_name": "Amaranthus viridis L.",
+      "plant_family": "Amaranthaceae",
+      "icon": "🥬",
+      "medicine_properties": "Primarily a leafy food plant; leaves provide dietary nutrients and are traditionally used as greens.",
+      "uses": [
+        "Leafy vegetable",
+        "Traditional food"
+      ],
+      "benefits": "The tender leaves and shoots are cooked and eaten as a leafy vegetable.",
+      "description": "An annual herb with green, oval leaves and small green flowers arranged in slender clusters.",
+      "parts_commonly_used": [
+        "Leaves",
+        "Tender shoots"
+      ],
+      "growing": "A fast-growing annual herb that grows well in warm conditions."
+    },
+    {
+      "id": "globe-amaranth",
+      "name": "Globe Amaranth",
+      "scientific_name": "Gomphrena globosa L.",
+      "plant_family": "Amaranthaceae",
+      "icon": "🌸",
+      "medicine_properties": "Traditionally associated with antioxidant and anti-inflammatory properties; research findings do not establish it as a treatment.",
+      "uses": [
+        "Ornamental flowers",
+        "Traditional herbal preparations",
+        "Dried flower arrangements"
+      ],
+      "benefits": "Best known as an ornamental plant; its flowers are also used in some traditional herbal preparations.",
+      "description": "An annual herb with papery, globe-shaped flower heads, commonly magenta, purple, pink or white.",
+      "parts_commonly_used": [
+        "Flowers",
+        "Aerial parts"
+      ],
+      "growing": "A heat-tolerant annual that grows best in sunny locations with well-drained soil."
+    },
+    {
+      "id": "hibiscus",
+      "name": "Hibiscus (China Rose)",
+      "scientific_name": "Hibiscus rosa-sinensis L.",
+      "plant_family": "Malvaceae",
+      "icon": "🌺",
+      "medicine_properties": "Traditionally associated with antioxidant and hair-care properties; evidence and uses vary by preparation.",
+      "uses": [
+        "Ornamental plant",
+        "Traditional hair-care preparations",
+        "Traditional herbal preparations"
+      ],
+      "benefits": "Widely grown as an ornamental shrub; flowers and leaves are used in some traditional hair-care and herbal preparations.",
+      "description": "An evergreen shrub with glossy, toothed leaves and large, showy flowers with a prominent central column of stamens.",
+      "parts_commonly_used": [
+        "Flowers",
+        "Leaves"
+      ],
+      "growing": "A tropical shrub that prefers warmth, sunlight and moist, well-drained soil."
+    },
+    {
+      "id": "koranda",
+      "name": "Koranda (Karonda)",
+      "scientific_name": "Carissa carandas L.",
+      "plant_family": "Apocynaceae",
+      "icon": "🍒",
+      "medicine_properties": "The fruits are mainly valued as food; traditional medicinal uses are reported but should not be considered proven treatments.",
+      "uses": [
+        "Edible fruit",
+        "Pickles",
+        "Chutneys",
+        "Traditional food preparations"
+      ],
+      "benefits": "Its sour fruits are commonly used in pickles, chutneys and other cooked preparations.",
+      "description": "A thorny evergreen shrub with opposite leaves, fragrant white flowers and small fruits that ripen from green to red or dark purple.",
+      "parts_commonly_used": [
+        "Ripe fruits",
+        "Unripe fruits"
+      ],
+      "growing": "A hardy shrub suited to warm climates and well-drained soil."
+    },
+    {
+      "id": "malabar-spinach",
+      "name": "Malabar Spinach",
+      "scientific_name": "Basella alba L.",
+      "plant_family": "Basellaceae",
+      "icon": "🥬",
+      "medicine_properties": "Primarily a nutritious leafy vegetable; it is not a substitute for medical treatment.",
+      "uses": [
+        "Leafy vegetable",
+        "Cooked greens",
+        "Soups and stews"
+      ],
+      "benefits": "The fleshy leaves and tender stems are cooked and eaten as a leafy vegetable in warm-climate cuisines.",
+      "description": "A fast-growing climbing vine with thick, glossy, heart-shaped leaves and small flowers followed by dark berries.",
+      "parts_commonly_used": [
+        "Leaves",
+        "Tender stems"
+      ],
+      "growing": "A warm-season vine that grows well with support and regular moisture."
+    },
+    {
+      "id": "mint",
+      "name": "Mint",
+      "scientific_name": "Mentha spicata L.",
+      "plant_family": "Lamiaceae",
+      "icon": "🌿",
+      "medicine_properties": "Traditionally associated with digestive and aromatic properties; specific effects vary by preparation.",
+      "uses": [
+        "Culinary herb",
+        "Tea and beverages",
+        "Traditional digestive preparations"
+      ],
+      "benefits": "The aromatic leaves are widely used to flavor foods and drinks and in traditional preparations for digestive comfort.",
+      "description": "An aromatic perennial herb with square stems, opposite toothed leaves and small flowers arranged in spikes.",
+      "parts_commonly_used": [
+        "Leaves",
+        "Aerial parts"
+      ],
+      "growing": "A spreading herb that grows well in moist soil and partial to full sunlight.",
+      "note": "Mint is a broad common name; this entry represents spearmint (Mentha spicata)."
+    },
+    {
+      "id": "padri",
+      "name": "Padri (Fragrant Padri Tree)",
+      "scientific_name": "Stereospermum chelonoides (L.f.) DC.",
+      "plant_family": "Bignoniaceae",
+      "icon": "🌳",
+      "medicine_properties": "Traditional medicinal use is reported for different plant parts; clinical effectiveness is not established.",
+      "uses": [
+        "Traditional herbal preparations",
+        "Shade and ornamental tree"
+      ],
+      "benefits": "A native tree valued for its fragrant flowers and reported use in traditional herbal practices.",
+      "description": "A deciduous tree with compound leaves, fragrant pale yellow flowers often marked with purple, and long narrow capsules.",
+      "parts_commonly_used": [
+        "Bark",
+        "Flowers",
+        "Leaves",
+        "Roots"
+      ],
+      "growing": "A deciduous tree suited to warm climates and seasonally moist conditions.",
+      "note": "The common name Padri may refer to different plants regionally; this record uses Stereospermum chelonoides."
+    },
+    {
+      "id": "noni",
+      "name": "Nooni (Noni)",
+      "scientific_name": "Morinda citrifolia",
+      "plant_family": "Rubiaceae",
+      "icon": "🌳",
+      "medicine_properties": "Traditionally associated with antioxidant, anti-inflammatory and antimicrobial properties.",
+      "uses": [
+        "Digestive preparations",
+        "Inflammatory complaints",
+        "General wellness"
+      ],
+      "benefits": "Traditionally used in South and Southeast Asian and Pacific medicine practices for digestive, inflammatory and general wellness purposes.",
+      "description": "A small evergreen tree or shrub with large glossy leaves, white tubular flowers and distinctive irregularly shaped greenish-white fruits.",
+      "parts_commonly_used": [
+        "Fruit",
+        "Leaves",
+        "Roots"
+      ],
+      "growing": "A small evergreen tree or shrub."
+    },
+    {
+      "id": "parijatha",
+      "name": "Parijatha (Night-flowering Jasmine)",
+      "scientific_name": "Nyctanthes arbor-tristis",
+      "plant_family": "Oleaceae",
+      "icon": "🌼",
+      "medicine_properties": "Traditionally associated with anti-inflammatory, antioxidant, antipyretic and antimicrobial properties.",
+      "uses": [
+        "Fever",
+        "Joint-related complaints",
+        "Digestive problems",
+        "Inflammatory conditions"
+      ],
+      "benefits": "Traditionally used in Ayurveda and folk medicine for fever, joint-related complaints, digestive problems and various inflammatory conditions.",
+      "description": "A small tree or shrub with rough leaves and highly fragrant white flowers with orange-red centers. The flowers open at night and usually fall by morning.",
+      "parts_commonly_used": [
+        "Leaves",
+        "Flowers",
+        "Bark",
+        "Seeds"
+      ],
+      "growing": "A small tree or shrub."
+    },
+    {
+      "id": "thumbe",
+      "name": "Thumbe (Thumbai)",
+      "scientific_name": "Leucas aspera (Willd.) Link",
+      "plant_family": "Lamiaceae",
+      "icon": "🌿",
+      "medicine_properties": "Traditionally associated with anti-inflammatory, antimicrobial, antioxidant and insect-repellent properties.",
+      "uses": [
+        "Cough",
+        "Cold",
+        "Fever",
+        "Skin-related complaints",
+        "Insect bites"
+      ],
+      "benefits": "Traditionally used in Indian folk medicine for cough, cold, fever, skin-related complaints and insect bites.",
+      "description": "A small aromatic herb with an erect, hairy stem, opposite leaves and distinctive white flowers arranged in clusters around the stem.",
+      "parts_commonly_used": [
+        "Whole plant",
+        "Leaves",
+        "Aerial parts"
+      ],
+      "growing": "A small aromatic herb."
+    }
+  ]
+}

@@ -1,27 +1,47 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './home.css';
 
-const HomePage = ({ onRequireLogin }) => {
+const HomePage = () => {
   const [activeTab, setActiveTab] = useState('upload');
   const [uploadedImage, setUploadedImage] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [plantSearchResults, setPlantSearchResults] = useState(null);
   const [cameraActive, setCameraActive] = useState(false);
   const [analyzing, setAnalyzing] = useState(false);
   const [analysisResults, setAnalysisResults] = useState(null);
+  const [analysisError, setAnalysisError] = useState('');
   const [recentSearches, setRecentSearches] = useState([]);
-  const [plantDatabase, setPlantDatabase] = useState([
-    { id: 1, name: 'Tulsi (Holy Basil)', uses: 'Immunity, respiratory health' },
-    { id: 2, name: 'Neem', uses: 'Skin care, antibacterial' },
-    { id: 3, name: 'Aloe Vera', uses: 'Healing, skin regeneration' },
-    { id: 4, name: 'Ginger', uses: 'Digestion, inflammation' },
-    { id: 5, name: 'Mint', uses: 'Digestion, fresh breath' },
-    { id: 6, name: 'Turmeric', uses: 'Anti-inflammatory, antioxidant' },
-  ]);
+  const [plantDatabase, setPlantDatabase] = useState([]);
+  const featuredPlants = [
+    { id: 'tulsi', name: 'Tulsi (Holy Basil)', uses: 'Immunity, respiratory health', icon: '🌿' },
+    { id: 'neem', name: 'Neem', uses: 'Skin care, antibacterial', icon: '🌿' },
+    { id: 'aloe-vera', name: 'Aloe Vera', uses: 'Healing, skin regeneration', icon: '🌿' },
+    { id: 'ginger', name: 'Ginger', uses: 'Digestion, inflammation', icon: '🌿' },
+    { id: 'mint', name: 'Mint', uses: 'Digestion, fresh breath', icon: '🌿' },
+    { id: 'turmeric', name: 'Turmeric', uses: 'Anti-inflammatory, antioxidant', icon: '🌿' },
+  ];
   
   const videoRef = useRef(null);
   const cameraStreamRef = useRef(null);
   const canvasRef = useRef(null);
   const fileInputRef = useRef(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch('/api/plants')
+      .then((response) => {
+        if (!response.ok) throw new Error(`Plant API returned ${response.status}`);
+        return response.json();
+      })
+      .then((data) => {
+        if (!data.success) throw new Error(data.message || 'Could not load plants');
+        if (!cancelled) setPlantDatabase(Array.isArray(data.plants) ? data.plants : []);
+      })
+      .catch((error) => {
+        console.error('Could not load plant profiles from backend:', error);
+      });
+    return () => { cancelled = true; };
+  }, []);
 
   // Handle manual image upload
   const handleImageUpload = (e) => {
@@ -31,6 +51,7 @@ const HomePage = ({ onRequireLogin }) => {
       reader.onload = (event) => {
         setUploadedImage(event.target.result);
         setAnalysisResults(null);
+        setAnalysisError('');
       };
       reader.readAsDataURL(file);
     }
@@ -164,6 +185,7 @@ const HomePage = ({ onRequireLogin }) => {
 
     setUploadedImage(imageData);
     setAnalysisResults(null);
+    setAnalysisError('');
 
     stopCamera();
 
@@ -181,6 +203,7 @@ const HomePage = ({ onRequireLogin }) => {
   try {
 
     setAnalyzing(true);
+    setAnalysisError('');
     setActiveTab('results');
 
     // Re-encode uploads and camera captures at a bounded size. Phone photos
@@ -249,7 +272,7 @@ const HomePage = ({ onRequireLogin }) => {
       error
     );
 
-    alert(error.message || 'Unable to connect to HerbVisionAI backend.');
+    setAnalysisError(error.message || 'Unable to connect to HerbVisionAI backend.');
 
   } finally {
 
@@ -260,37 +283,61 @@ const HomePage = ({ onRequireLogin }) => {
   // Handle search
   const handleSearch = (e) => {
     e.preventDefault();
-    if (searchQuery.trim()) {
-      if (onRequireLogin) {
-        onRequireLogin();
-        return;
-      }
+    const query = searchQuery.trim();
+    if (!query) return;
 
-      // Add to recent searches
-      setRecentSearches([searchQuery, ...recentSearches.slice(0, 4)]);
-      performSearch(searchQuery);
-    }
+    setRecentSearches((searches) => [query, ...searches.filter((item) => item.toLowerCase() !== query.toLowerCase())].slice(0, 5));
+    performSearch(query);
   };
 
-  // Perform search
+  // Search the same profiles displayed on the HerbPedia page.
   const performSearch = (query) => {
-    const lowerQuery = query.toLowerCase();
-    const results = plantDatabase.filter(plant => 
-      plant.name.toLowerCase().includes(lowerQuery) || 
-      plant.uses.toLowerCase().includes(lowerQuery)
-    );
-    
-    if (results.length > 0) {
-      const plant = results[0];
-      setAnalysisResults({
-        name: plant.name,
-        confidence: '89%',
-        uses: plant.uses.split(', '),
-        benefits: `${plant.name} is a powerful medicinal herb with multiple health benefits.`,
-        growing: 'This herb can be grown in your garden or in pots for easy access.',
-        icon: plant.icon
-      });
-    }
+    const normalizedQuery = query.trim().toLocaleLowerCase();
+    const matches = plantDatabase.filter((plant) => {
+      const searchableText = [
+        plant.name,
+        plant.scientific_name,
+        plant.plant_family,
+        plant.description,
+        plant.medicine_properties,
+        plant.benefits,
+        plant.growing,
+        ...(plant.uses || []),
+        ...(plant.parts_commonly_used || []),
+        ...Object.values(plant.leaf_features || {})
+      ].filter(Boolean).join(' ').toLocaleLowerCase();
+      return searchableText.includes(normalizedQuery);
+    });
+    setPlantSearchResults(matches);
+    setAnalysisResults(null);
+    setAnalysisError('');
+  };
+
+  const downloadPlantInfo = (plant) => {
+    const lines = [
+      plant.name,
+      plant.scientific_name ? `Scientific name: ${plant.scientific_name}` : null,
+      plant.plant_family ? `Plant family: ${plant.plant_family}` : null,
+      plant.description ? `Description: ${plant.description}` : null,
+      plant.medicine_properties ? `Medicinal properties: ${plant.medicine_properties}` : null,
+      plant.uses?.length ? `Uses: ${plant.uses.join('; ')}` : null,
+      plant.benefits ? `Benefits: ${plant.benefits}` : null,
+      plant.parts_commonly_used?.length ? `Parts commonly used: ${plant.parts_commonly_used.join(', ')}` : null,
+      plant.leaf_features ? `Leaf features: ${Object.entries(plant.leaf_features).map(([key, value]) => `${key}: ${value}`).join('; ')}` : null,
+      plant.growing ? `Growing: ${plant.growing}` : null,
+      plant.note ? `Note: ${plant.note}` : null,
+      '',
+      'Educational information only. Verify plant identification with an expert.'
+    ].filter((line) => line !== null);
+    const file = new Blob([lines.join('\n')], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(file);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `${(plant.id || plant.name).toLowerCase().replace(/[^a-z0-9]+/g, '-')}-plant-info.txt`;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    window.setTimeout(() => URL.revokeObjectURL(url), 1000);
   };
 
   // Handle logout
@@ -334,10 +381,10 @@ const HomePage = ({ onRequireLogin }) => {
           </div>
 
           <ul className="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#herbpedia">HerbPedia</a></li>
+            <li><a href="#about-page">About</a></li>
+            <li><a href="#herbpedia-page">HerbPedia</a></li>
             <li><a href="#services">Services</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#contact-page">Contact</a></li>
           </ul>
 
           <button className="logout-btn" onClick={handleLogout}>Logout</button>
@@ -361,6 +408,37 @@ const HomePage = ({ onRequireLogin }) => {
             />
             <button type="submit" className="search-btn">🔍 Search</button>
           </form>
+
+          {plantSearchResults !== null && (
+            <section className="plant-search-results" aria-live="polite" aria-label="Plant search results">
+              <h3>{plantSearchResults.length ? `${plantSearchResults.length} HerbPedia result${plantSearchResults.length === 1 ? '' : 's'}` : 'No plants found'}</h3>
+              {plantSearchResults.length === 0 ? (
+                <p>Try a plant name, botanical name, use, or plant feature.</p>
+              ) : plantSearchResults.map((plant) => (
+                <article className="plant-search-result" key={plant.id}>
+                  <div className="plant-search-result-heading">
+                    <span aria-hidden="true">{plant.icon || '🌿'}</span>
+                    <div>
+                      <h4>{plant.name}</h4>
+                      {plant.scientific_name && <p><em>{plant.scientific_name}</em></p>}
+                    </div>
+                  </div>
+                  {plant.plant_family && <p><strong>Family:</strong> {plant.plant_family}</p>}
+                  {plant.description && <p>{plant.description}</p>}
+                  {plant.medicine_properties && <p><strong>Properties:</strong> {plant.medicine_properties}</p>}
+                  {plant.uses?.length > 0 && <p><strong>Uses:</strong> {plant.uses.join(' · ')}</p>}
+                  {plant.benefits && <p><strong>Benefits:</strong> {plant.benefits}</p>}
+                  {plant.parts_commonly_used?.length > 0 && <p><strong>Parts used:</strong> {plant.parts_commonly_used.join(', ')}</p>}
+                  {plant.leaf_features && <p><strong>Leaf features:</strong> {Object.entries(plant.leaf_features).map(([key, value]) => `${key}: ${value}`).join(' · ')}</p>}
+                  {plant.growing && <p><strong>Growing:</strong> {plant.growing}</p>}
+                  {plant.note && <p><strong>Note:</strong> {plant.note}</p>}
+                  <button className="plant-info-download" type="button" onClick={() => downloadPlantInfo(plant)}>
+                    ⬇ Download information
+                  </button>
+                </article>
+              ))}
+            </section>
+          )}
 
           {/* Recent Searches */}
           {recentSearches.length > 0 && (
@@ -623,6 +701,13 @@ const HomePage = ({ onRequireLogin }) => {
                         </button>
                       </div>
                     </>
+                  ) : analysisError ? (
+                    <div className="results-placeholder" role="alert">
+                      <div className="plant-icon-large" aria-hidden="true">🍃</div>
+                      <h3>Image not matched</h3>
+                      <p>{analysisError}</p>
+                      <p>Photo matching needs a trained plant classifier. The app will not guess Tulsi.</p>
+                    </div>
                   ) : (
                     <div className="results-placeholder">
                       <button className="analyze-btn" onClick={sendImageToBackend} disabled={analyzing}>
@@ -644,10 +729,10 @@ const HomePage = ({ onRequireLogin }) => {
       </section>
 
       {/* Featured Plants Section */}
-      <section className="featured-plants">
+      <section className="featured-plants" id="herbpedia">
         <h2>Featured Medicinal Plants</h2>
         <div className="plants-grid">
-          {plantDatabase.map(plant => (
+          {featuredPlants.map(plant => (
             <div 
               key={plant.id} 
               className="plant-card"
@@ -666,7 +751,7 @@ const HomePage = ({ onRequireLogin }) => {
       </section>
 
       {/* Features Section */}
-      <section className="features-section">
+      <section className="features-section" id="services">
         <h2>Why Choose HerbVisionAI?</h2>
         <div className="features-grid">
           <div className="feature-card">

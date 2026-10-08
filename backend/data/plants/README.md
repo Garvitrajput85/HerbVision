@@ -1,28 +1,24 @@
-# Plant leaf data
-
 Save every plant as one object inside the `plants` array in `plant_details.json`.
-The `id` must be unique, lowercase, and use hyphens instead of spaces.
 
 ```json
 {
-  "id": "neem",
-  "name": "Neem",
-  "scientific_name": "Azadirachta indica",
-  "icon": "🌱",
-  "uses": ["Skin care", "Traditional antibacterial use"],
-  "benefits": "Short description of the plant's benefits.",
-  "growing": "Sunlight, soil, and watering requirements.",
-  "leaf_features": {
-    "color": "Dark green",
-    "shape": "Long and pointed with serrated edges",
-    "arrangement": "Pinnate"
-  }
+  "plants": [
+    {
+      "id": "tulsi",
+      "name": "Tulsi",
+      "scientific_name": "Ocimum tenuiflorum",
+      "plant_family": "Lamiaceae",
+      "description": "Short description.",
+      "uses": "Traditional uses",
+      "benefits": "Short description of the plant's benefits.",
+      "growing": "Growing information."
+    }
+  ]
 }
 ```
 
-Add this object after the Tulsi object, with a comma between objects. Restart the backend after editing the JSON file.
-
-Available endpoints:
+With `MONGODB_URI` and `MONGODB_DATABASE` configured in `backend/.env`, the Flask API stores these records in the `plants` array of a document in the `HerbVision.Plants` collection when that collection is empty. API endpoints:
 
 - `GET /api/plants` — all saved plants
-- `GET /api/plants/neem` — one plant by ID
+- `GET /api/plants/<id>` — one plant by ID
+- `POST /api/users` — save a user with a JSON body such as `{"name":"Asha","email":"asha@example.com"}`. Email addresses are unique.
