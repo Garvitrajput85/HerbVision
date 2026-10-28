@@ -12,6 +12,7 @@ const HomePage = () => {
   const [analysisError, setAnalysisError] = useState('');
   const [recentSearches, setRecentSearches] = useState([]);
   const [plantDatabase, setPlantDatabase] = useState([]);
+  const [theme, setTheme] = useState(() => localStorage.getItem('herbvision-theme') || 'light');
   const featuredPlants = [
     { id: 'tulsi', name: 'Tulsi (Holy Basil)', uses: 'Immunity, respiratory health', icon: '🌿' },
     { id: 'neem', name: 'Neem', uses: 'Skin care, antibacterial', icon: '🌿' },
@@ -25,6 +26,34 @@ const HomePage = () => {
   const cameraStreamRef = useRef(null);
   const canvasRef = useRef(null);
   const fileInputRef = useRef(null);
+
+  useEffect(() => {
+    localStorage.setItem('herbvision-theme', theme);
+  }, [theme]);
+
+  const suggestions = (() => {
+    const query = searchQuery.trim().toLowerCase();
+    if (!query || !plantDatabase.length) return [];
+    const distance = (a, b) => {
+      let row = Array.from({ length: b.length + 1 }, (_, i) => i);
+      for (let i = 1; i <= a.length; i++) {
+        const next = [i];
+        for (let j = 1; j <= b.length; j++) next[j] = Math.min(next[j - 1] + 1, row[j] + 1, row[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+        row = next;
+      }
+      return row[b.length];
+    };
+    return plantDatabase.map((plant) => {
+      const names = [plant.name, plant.scientific_name].filter(Boolean);
+      const rank = Math.min(...names.map((name) => {
+        const normalized = name.toLowerCase();
+        return normalized.includes(query) ? 0 : Math.min(...normalized.split(/[^a-z]+/).filter(Boolean).map((word) => distance(query, word)));
+      }));
+      return { plant, rank };
+    }).filter(({ rank }) => rank <= Math.max(1, Math.floor(query.length * 0.35)))
+      .sort((a, b) => a.rank - b.rank || a.plant.name.localeCompare(b.plant.name))
+      .slice(0, 5).map(({ plant }) => plant);
+  })();
 
   useEffect(() => {
     let cancelled = false;
@@ -372,7 +401,7 @@ const HomePage = () => {
   };
 
   return (
-    <div className="home-page">
+    <div className={`home-page ${theme === 'dark' ? 'theme-dark' : ''}`}>
       {/* Navigation Bar */}
       <nav className="navbar">
         <div className="nav-container">
@@ -387,7 +416,12 @@ const HomePage = () => {
             <li><a href="#contact-page">Contact</a></li>
           </ul>
 
-          <button className="logout-btn" onClick={handleLogout}>Logout</button>
+          <div className="nav-actions">
+            <button className="theme-toggle" type="button" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}>
+              {theme === 'dark' ? '☀️ Light' : '🌙 Dark'}
+            </button>
+            <button className="logout-btn" onClick={handleLogout}>Logout</button>
+          </div>
         </div>
       </nav>
 
@@ -405,9 +439,18 @@ const HomePage = () => {
               placeholder="Search herbs, plants, or diseases..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
+              autoComplete="off"
             />
             <button type="submit" className="search-btn">🔍 Search</button>
           </form>
+
+          {suggestions.length > 0 && searchQuery.trim() && (
+            <div className="plant-suggestions" role="listbox" aria-label="Plant name suggestions">
+              {suggestions.map((plant) => <button key={plant.id} type="button" role="option" onClick={() => { setSearchQuery(plant.name); performSearch(plant.name); }}>
+                <span aria-hidden="true">🌿</span><span>{plant.name}</span>{plant.scientific_name && <small>{plant.scientific_name}</small>}
+              </button>)}
+            </div>
+          )}
 
           {plantSearchResults !== null && (
             <section className="plant-search-results" aria-live="polite" aria-label="Plant search results">
@@ -706,7 +749,7 @@ const HomePage = () => {
                       <div className="plant-icon-large" aria-hidden="true">🍃</div>
                       <h3>Image not matched</h3>
                       <p>{analysisError}</p>
-                      <p>Photo matching needs a trained plant classifier. The app will not guess Tulsi.</p>
+                      <p>Try a clear, close-up photo of one supported plant.</p>
                     </div>
                   ) : (
                     <div className="results-placeholder">

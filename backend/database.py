@@ -14,6 +14,7 @@ except ImportError:  # pragma: no cover
 
 BASE_DIR = Path(__file__).resolve().parent
 PLANT_DATA_FILE = BASE_DIR / "data" / "plants" / "plant_details.json"
+FRONTEND_PLANT_DATA_FILE = BASE_DIR.parent / "frontend" / "plant_details.json"
 
 MONGO_URI = os.getenv(
     "MONGO_URI",
@@ -58,16 +59,35 @@ _connect_mongo()
 
 
 def load_local_plants():
-    if not PLANT_DATA_FILE.exists():
-        return []
+    """Load the backend records plus the fuller catalog bundled with the UI."""
+    plants_by_id = {}
 
-    with PLANT_DATA_FILE.open("r", encoding="utf-8") as file:
-        data = json.load(file)
+    for data_file in (FRONTEND_PLANT_DATA_FILE, PLANT_DATA_FILE):
+        if not data_file.is_file():
+            continue
 
-    plants = data.get("plants", [])
-    if isinstance(plants, list):
-        return plants
-    return []
+        with data_file.open("r", encoding="utf-8") as file:
+            data = json.load(file)
+
+        plants = data.get("plants", []) if isinstance(data, dict) else data
+        if not isinstance(plants, list):
+            continue
+
+        for plant in plants:
+            if not isinstance(plant, dict):
+                continue
+            plant_id = str(plant.get("id") or plant.get("name") or "").strip().casefold()
+            if not plant_id:
+                continue
+
+            # Keep richer catalog values when a backend override leaves a field blank.
+            existing = plants_by_id.get(plant_id, {})
+            plants_by_id[plant_id] = {
+                **existing,
+                **{key: value for key, value in plant.items() if value not in (None, "", [], {})},
+            }
+
+    return list(plants_by_id.values())
 
 
 def get_all_plants():

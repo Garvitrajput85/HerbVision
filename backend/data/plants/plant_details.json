@@ -1,8 +1,43 @@
-import certifi
-from pymongo import MongoClient
-
-client = MongoClient(
-    "mongodb+srv://garvitrajput85_db_user:xunQmVFJk5i6ahnJ@cluster0.0v9ydkr.mongodb.net/",
-    tls=True,
-    tlsAllowInvalidCertificates=True
-)
+{
+  "plants": [
+    {
+      "id": "tulsi",
+      "name": "Tulsi",
+      "scientific_name": "Ocimum tenuiflorum",
+      "icon": "🌿",
+      "uses": ["Traditional wellness formulations", "Home garden herb"],
+      "benefits": "Traditionally valued for wellness and daily herbal use.",
+      "growing": "Warm, sunny conditions with regular moisture and good drainage.",
+      "plant_family": "Lamiaceae",
+      "description": "Tulsi is a sacred herb known for its aromatic leaves and easy cultivation.",
+      "medicine_properties": "Used in traditional wellness practices; safety depends on preparation and dose.",
+      "parts_commonly_used": ["Leaves"]
+    },
+    {
+      "id": "neem",
+      "name": "Neem",
+      "scientific_name": "Azadirachta indica",
+      "icon": "🌿",
+      "uses": ["Traditional skin care", "Shade tree"],
+      "benefits": "Traditionally used for topical and household applications.",
+      "growing": "Thrives in warm climates with full sun and well-drained soil.",
+      "plant_family": "Meliaceae",
+      "description": "Neem is a fast-growing tree with bitter leaves and a long medicinal tradition.",
+      "medicine_properties": "Leaves and oil are used in traditional preparations; not all products are interchangeable.",
+      "parts_commonly_used": ["Leaves", "Oil", "Bark"]
+    },
+    {
+      "id": "aloe-vera",
+      "name": "Aloe Vera",
+      "scientific_name": "Aloe vera",
+      "icon": "🌿",
+      "uses": ["Skin care", "Ornamental succulent"],
+      "benefits": "Often used in topical skin-care products.",
+      "growing": "Prefers bright light and low-water, well-drained conditions.",
+      "plant_family": "Asphodelaceae",
+      "description": "Aloe vera is a succulent with fleshy leaves and a well-known gel.",
+      "medicine_properties": "Leaf gel is commonly used topically, but latex and gel differ in safety.",
+      "parts_commonly_used": ["Leaf gel"]
+    }
+  ]
+}

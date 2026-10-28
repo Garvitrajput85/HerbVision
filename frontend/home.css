@@ -30,6 +30,10 @@
   padding: 15px 30px;
 }
 
+.nav-actions { display: flex; align-items: center; gap: 10px; }
+.theme-toggle { border: 1px solid rgba(255,255,255,.55); border-radius: 6px; padding: 9px 12px; background: rgba(255,255,255,.12); color: #fff; cursor: pointer; font-weight: 600; }
+.theme-toggle:hover { background: rgba(255,255,255,.24); }
+
 .logo h1 {
   color: white;
   font-size: 24px;
@@ -1017,4 +1021,41 @@
 
 .plant-info-download:hover {
   background: #31552a;
+}
+
+.plant-suggestions {
+  position: relative;
+  z-index: 20;
+  margin: -20px auto 20px;
+  width: min(680px, calc(100% - 60px));
+  padding: 6px;
+  border: 1px solid #dce7d6;
+  border-radius: 12px;
+  background: #fff;
+  color: #29452a;
+  box-shadow: 0 12px 30px rgba(0,0,0,.22);
+  text-align: left;
+}
+.plant-suggestions button { display: flex; align-items: center; gap: 10px; width: 100%; padding: 10px 12px; border: 0; border-radius: 8px; background: transparent; color: inherit; text-align: left; cursor: pointer; }
+.plant-suggestions button:hover, .plant-suggestions button:focus-visible { background: #eff5eb; }
+.plant-suggestions small { margin-left: auto; color: #71806d; }
+
+.home-page.theme-dark { background: #141b16; color: #e4ece4; }
+.theme-dark .action-section, .theme-dark .tabs-section, .theme-dark .featured-plants, .theme-dark .features-section { background: #141b16; color: #e4ece4; }
+.theme-dark .tab-content, .theme-dark .upload-box, .theme-dark .results-container, .theme-dark .results-info, .theme-dark .plant-card, .theme-dark .feature-card, .theme-dark .plant-search-result { background: #202a22; color: #e4ece4; border-color: #354638; }
+.theme-dark .tab-btn, .theme-dark .upload-box p, .theme-dark .plant-card p, .theme-dark .feature-card p, .theme-dark .footer, .theme-dark .plant-search-result p { color: #bfccbf; }
+.theme-dark .tab-btn.active, .theme-dark .search-input { background: #26352a; color: #f3f8f2; border-color: #607b61; }
+.theme-dark .search-input::placeholder { color: #b9c9b9; }
+.theme-dark .recent-searches p { color: #e1e9e0; }
+.theme-dark .plant-suggestions { background: #202a22; color: #e4ece4; border-color: #465a47; }
+.theme-dark .plant-suggestions button:hover, .theme-dark .plant-suggestions button:focus-visible { background: #304333; }
+.theme-dark .plant-suggestions small { color: #b5c5b2; }
+.theme-dark .footer { background: #101611; }
+
+@media (max-width: 760px) {
+  .nav-actions { gap: 6px; }
+  .theme-toggle { padding: 8px; font-size: 12px; }
+  .logout-btn { padding: 8px 10px; }
+  .plant-suggestions { width: calc(100% - 32px); }
+  .plant-suggestions small { display: none; }
 }
