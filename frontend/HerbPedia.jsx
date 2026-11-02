@@ -99,21 +99,36 @@ function PlantPhoto({ plant, compact = false }) {
     if (!visible) return undefined;
     setPhoto(null);
     setPhotoUnavailable(false);
-    const term = encodeURIComponent(plant.scientific_name);
+
+    const leafSearchTerms = [
+      `${plant.scientific_name} leaf`,
+      `${plant.name} leaf`,
+      `${plant.scientific_name} leaves`,
+      `${plant.name} leaves`,
+      `${plant.scientific_name} foliage`
+    ];
+    const leafFocusTerms = ['leaf', 'leaf closeup', 'leaves', 'foliage', 'botanical leaf'];
     let cancelled = false;
-    const findLicensedPhoto = async () => {
-      for (const focus of ['leaf', '']) {
+
+    const findLeafPhoto = async () => {
+      for (const term of leafSearchTerms) {
         for (const license of ['CC-BY', 'CC-BY-SA', 'CC0']) {
-          const query = focus ? `&q=${focus}` : '';
-          const endpoint = `https://api.inaturalist.org/v1/observations?taxon_name=${term}&quality_grade=research&photos=true&photo_license=${license}&per_page=1${query}`;
+          const endpoint = `https://api.inaturalist.org/v1/observations?${new URLSearchParams({
+            q: term,
+            quality_grade: 'research',
+            photos: 'true',
+            photo_license: license,
+            per_page: '1'
+          }).toString()}`;
+
           try {
             const response = await fetch(endpoint);
             if (!response.ok) continue;
             const data = await response.json();
-            const observation = data.results?.[0];
+            const observation = data.results?.find((item) => item?.photos?.length);
             const image = observation?.photos?.[0];
-            if (image?.url) {
-              if (!cancelled) setPhoto({
+            if (image?.url && !cancelled) {
+              setPhoto({
                 url: image.url.replace('/square.', '/medium.'),
                 page: observation.uri,
                 artist: image.attribution?.replace(/<[^>]*>/g, '') || 'iNaturalist observer',
@@ -122,14 +137,45 @@ function PlantPhoto({ plant, compact = false }) {
               return;
             }
           } catch {
-            // Continue to the next openly licensed photo option.
+            // Continue to the next leaf-search option.
           }
         }
       }
-      // Some less common plants have no leaf-tagged, openly licensed
-      // observation, but iNaturalist may still have a licensed taxon photo.
+
+      for (const focus of leafFocusTerms) {
+        for (const license of ['CC-BY', 'CC-BY-SA', 'CC0']) {
+          const endpoint = `https://api.inaturalist.org/v1/observations?${new URLSearchParams({
+            taxon_name: plant.scientific_name,
+            q: focus,
+            quality_grade: 'research',
+            photos: 'true',
+            photo_license: license,
+            per_page: '1'
+          }).toString()}`;
+
+          try {
+            const response = await fetch(endpoint);
+            if (!response.ok) continue;
+            const data = await response.json();
+            const observation = data.results?.find((item) => item?.photos?.length);
+            const image = observation?.photos?.[0];
+            if (image?.url && !cancelled) {
+              setPhoto({
+                url: image.url.replace('/square.', '/medium.'),
+                page: observation.uri,
+                artist: image.attribution?.replace(/<[^>]*>/g, '') || 'iNaturalist observer',
+                license: image.license_code || license
+              });
+              return;
+            }
+          } catch {
+            // Continue to the next observation filter.
+          }
+        }
+      }
+
       try {
-        const response = await fetch(`https://api.inaturalist.org/v1/taxa/autocomplete?q=${term}&per_page=1`);
+        const response = await fetch(`https://api.inaturalist.org/v1/taxa/autocomplete?q=${encodeURIComponent(plant.scientific_name)}&per_page=1`);
         if (response.ok) {
           const [taxon] = await response.json();
           const image = taxon?.default_photo;
@@ -144,20 +190,22 @@ function PlantPhoto({ plant, compact = false }) {
           }
         }
       } catch {
-        // The normal unavailable state below is shown when no licensed photo exists.
+        // No leaf-focused result available, so the placeholder is shown.
       }
+
       if (!cancelled) setPhotoUnavailable(true);
     };
-    findLicensedPhoto();
+
+    findLeafPhoto();
     return () => { cancelled = true; };
-  }, [plant.scientific_name, visible]);
+  }, [plant.scientific_name, plant.name, visible]);
 
   return (
     <div className={compact ? 'herb-photo compact' : 'herb-photo'} ref={photoRef}>
       {photo ? <>
-        <img src={photo.url} alt={`${plant.name} leaf`} loading="lazy" onError={() => { setPhoto(null); setPhotoUnavailable(true); }} />
+        <img src={photo.url} alt={`${plant.name} leaf close-up`} loading="lazy" onError={() => { setPhoto(null); setPhotoUnavailable(true); }} />
         {!compact && <a className="photo-credit" href={photo.page} target="_blank" rel="noreferrer">Photo: {photo.artist} · {photo.license}</a>}
-      </> : <div className="photo-placeholder" aria-label={`Photo of ${plant.name} loading or unavailable`}>
+      </> : <div className="photo-placeholder" aria-label={`Leaf photo of ${plant.name} loading or unavailable`}>
         <span aria-hidden="true">{photoUnavailable ? '🌱' : '🌿'}</span>
         {!compact && <small>{photoUnavailable ? 'No openly licensed leaf photo found' : visible ? 'Real leaf photo loading…' : 'Real leaf photo'}</small>}
       </div>}
@@ -338,4 +386,5 @@ function HerbPedia() {
   );
 }
 
+export { getNames };
 export default HerbPedia;

@@ -369,13 +369,6 @@ const HomePage = () => {
     window.setTimeout(() => URL.revokeObjectURL(url), 1000);
   };
 
-  // Handle logout
-  const handleLogout = () => {
-    localStorage.removeItem('authToken');
-    sessionStorage.removeItem('authToken');
-    // In a real app, redirect to login page
-  };
-
   const handleAnalyze = () => {
     if (uploadedImage) {
       setAnalyzing(true);
@@ -420,7 +413,7 @@ const HomePage = () => {
             <button className="theme-toggle" type="button" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}>
               {theme === 'dark' ? '☀️ Light' : '🌙 Dark'}
             </button>
-            <button className="logout-btn" onClick={handleLogout}>Logout</button>
+            <a className="admin-btn" href="#admin-panel">Admin</a>
           </div>
         </div>
       </nav>

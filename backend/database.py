@@ -15,6 +15,8 @@ except ImportError:  # pragma: no cover
 BASE_DIR = Path(__file__).resolve().parent
 PLANT_DATA_FILE = BASE_DIR / "data" / "plants" / "plant_details.json"
 FRONTEND_PLANT_DATA_FILE = BASE_DIR.parent / "frontend" / "plant_details.json"
+ADMIN_CATALOG_FILE = BASE_DIR / "data" / "plants" / "admin_catalog.json"
+ADMIN_CATALOG_ID = "herbvision_admin_catalog"
 
 MONGO_URI = os.getenv(
     "MONGO_URI",
@@ -60,6 +62,13 @@ _connect_mongo()
 
 def load_local_plants():
     """Load the backend records plus the fuller catalog bundled with the UI."""
+    if ADMIN_CATALOG_FILE.is_file():
+        with ADMIN_CATALOG_FILE.open("r", encoding="utf-8") as file:
+            catalog = json.load(file)
+        plants = catalog.get("plants", []) if isinstance(catalog, dict) else catalog
+        if isinstance(plants, list):
+            return plants
+
     plants_by_id = {}
 
     for data_file in (FRONTEND_PLANT_DATA_FILE, PLANT_DATA_FILE):
@@ -93,6 +102,10 @@ def load_local_plants():
 def get_all_plants():
     if collection is not None:
         try:
+            admin_catalog = collection.find_one({"_id": ADMIN_CATALOG_ID}, {"_id": 0})
+            if admin_catalog and isinstance(admin_catalog.get("plants"), list):
+                return admin_catalog["plants"]
+
             docs = list(collection.find({}, {"_id": 0}))
             plants = []
 
@@ -109,6 +122,29 @@ def get_all_plants():
             print(f"MongoDB read failed, falling back to local data: {exc}")
 
     return load_local_plants()
+
+
+def save_all_plants(plants):
+    """Persist the admin-managed catalog in MongoDB and the local fallback."""
+    ADMIN_CATALOG_FILE.parent.mkdir(parents=True, exist_ok=True)
+    temporary_file = ADMIN_CATALOG_FILE.with_suffix(".tmp")
+    temporary_file.write_text(
+        json.dumps({"plants": plants}, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    temporary_file.replace(ADMIN_CATALOG_FILE)
+
+    if collection is not None:
+        try:
+            collection.replace_one(
+                {"_id": ADMIN_CATALOG_ID},
+                {"plants": plants},
+                upsert=True,
+            )
+        except (PyMongoError, OSError, ValueError) as exc:
+            print(f"MongoDB catalog save failed; local catalog is saved: {exc}")
+
+    return plants
 
 
 def find_plant_by_id(plant_id):

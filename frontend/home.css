@@ -62,18 +62,20 @@
   transform: translateY(-2px);
 }
 
-.logout-btn {
+.admin-btn {
+  display: inline-flex;
+  align-items: center;
   background-color: #ff6b6b;
   color: white;
   border: none;
   padding: 10px 20px;
   border-radius: 6px;
-  cursor: pointer;
+  text-decoration: none;
   font-weight: 600;
   transition: all 0.3s ease;
 }
 
-.logout-btn:hover {
+.admin-btn:hover {
   background-color: #ff5252;
   transform: scale(1.05);
 }
@@ -1055,7 +1057,7 @@
 @media (max-width: 760px) {
   .nav-actions { gap: 6px; }
   .theme-toggle { padding: 8px; font-size: 12px; }
-  .logout-btn { padding: 8px 10px; }
+  .admin-btn { padding: 8px 10px; }
   .plant-suggestions { width: calc(100% - 32px); }
   .plant-suggestions small { display: none; }
 }

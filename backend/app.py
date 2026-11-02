@@ -1,5 +1,8 @@
 import json
+import hmac
 import os
+import re
+import subprocess
 import sys
 from pathlib import Path
 from threading import Lock
@@ -11,10 +14,21 @@ if os.name == "nt":
 else:
     ML_PYTHON = ML_ENV_PATH / "bin" / "python"
 
-# Keep inference on the interpreter where torch/torchvision are installed, even
-# when Flask is started directly with `python backend/app.py`.
+# Use the ML interpreter only when it can also run the API. A partially-created
+# ML environment must not prevent the Flask endpoints from starting.
 if ML_PYTHON.exists() and Path(sys.prefix).resolve() != ML_ENV_PATH.resolve():
-    os.execv(str(ML_PYTHON), [str(ML_PYTHON), str(Path(__file__).resolve()), *sys.argv[1:]])
+    try:
+        subprocess.run(
+            [str(ML_PYTHON), "-c", "import flask, pymongo"],
+            check=True,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            timeout=10,
+        )
+    except (subprocess.SubprocessError, OSError):
+        pass
+    else:
+        os.execv(str(ML_PYTHON), [str(ML_PYTHON), str(Path(__file__).resolve()), *sys.argv[1:]])
 
 if ML_ENV_PATH.exists():
     candidate_paths = [
@@ -25,10 +39,25 @@ if ML_ENV_PATH.exists():
         if candidate.exists() and str(candidate) not in sys.path:
             sys.path.insert(0, str(candidate))
 
+
+def _load_admin_token_from_env_file():
+    """Load only the admin key from backend/.env without overwriting the shell."""
+    env_file = Path(__file__).resolve().parent / ".env"
+    if os.getenv("ADMIN_TOKEN") or not env_file.is_file():
+        return
+    for line in env_file.read_text(encoding="utf-8").splitlines():
+        key, separator, value = line.partition("=")
+        if separator and key.strip() == "ADMIN_TOKEN":
+            os.environ["ADMIN_TOKEN"] = value.strip().strip("\"'")
+            return
+
+
+_load_admin_token_from_env_file()
+
 try:
-    from .database import get_all_plants, find_plant_by_id, search_plants
+    from .database import get_all_plants, find_plant_by_id, search_plants, save_all_plants
 except ImportError:
-    from database import get_all_plants, find_plant_by_id, search_plants
+    from database import get_all_plants, find_plant_by_id, search_plants, save_all_plants
 
 from flask import Flask, jsonify, request
 from flask_cors import CORS
@@ -162,6 +191,116 @@ def search_plant_route():
             "success": False,
             "message": f"Search failed: {str(exc)}",
         }), 500
+
+
+def _admin_authorized():
+    expected = os.getenv("ADMIN_TOKEN", "")
+    supplied = request.headers.get("X-Admin-Token", "")
+    return bool(expected) and hmac.compare_digest(expected.encode("utf-8"), supplied.encode("utf-8"))
+
+
+def _admin_auth_error():
+    if not os.getenv("ADMIN_TOKEN"):
+        return jsonify({
+            "success": False,
+            "message": "Admin access is not configured. Set ADMIN_TOKEN in backend/.env and restart the backend.",
+        }), 503
+    return jsonify({"success": False, "message": "Admin key is incorrect or has expired."}), 401
+
+
+def _clean_string(value, *, limit=4000):
+    return str(value or "").strip()[:limit]
+
+
+def _clean_string_list(value):
+    if isinstance(value, str):
+        value = re.split(r"[\n,]", value)
+    if not isinstance(value, list):
+        return []
+    return [_clean_string(item, limit=300) for item in value if _clean_string(item, limit=300)]
+
+
+def _validated_plant(payload, existing=None):
+    if not isinstance(payload, dict):
+        raise ValueError("Send plant details as a JSON object.")
+    existing = existing or {}
+    plant_id = _clean_string(payload.get("id", existing.get("id", "")), limit=100).lower()
+    if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", plant_id):
+        raise ValueError("Plant ID must use lowercase letters, numbers, and single hyphens.")
+    name = _clean_string(payload.get("name", existing.get("name", "")), limit=200)
+    scientific_name = _clean_string(payload.get("scientific_name", existing.get("scientific_name", "")), limit=300)
+    if not name or not scientific_name:
+        raise ValueError("Plant name and scientific name are required.")
+
+    plant = {
+        **existing,
+        "id": plant_id,
+        "name": name,
+        "scientific_name": scientific_name,
+        "plant_family": _clean_string(payload.get("plant_family", existing.get("plant_family", "")), limit=200),
+        "description": _clean_string(payload.get("description", existing.get("description", ""))),
+        "medicine_properties": _clean_string(payload.get("medicine_properties", existing.get("medicine_properties", ""))),
+        "uses": _clean_string_list(payload.get("uses", existing.get("uses", []))),
+        "benefits": _clean_string(payload.get("benefits", existing.get("benefits", ""))),
+        "parts_commonly_used": _clean_string_list(payload.get("parts_commonly_used", existing.get("parts_commonly_used", []))),
+        "growing": _clean_string(payload.get("growing", existing.get("growing", ""))),
+        "hindi_name": _clean_string(payload.get("hindi_name", existing.get("hindi_name", "")), limit=200),
+        "local_names": _clean_string_list(payload.get("local_names", existing.get("local_names", []))),
+        "popular_names": _clean_string_list(payload.get("popular_names", existing.get("popular_names", []))),
+    }
+    leaf_features = payload.get("leaf_features", existing.get("leaf_features", {}))
+    if isinstance(leaf_features, dict):
+        plant["leaf_features"] = {
+            _clean_string(key, limit=100): _clean_string(value, limit=500)
+            for key, value in leaf_features.items()
+            if _clean_string(key, limit=100) and _clean_string(value, limit=500)
+        }
+    return plant
+
+
+@app.route("/api/admin/plants", methods=["GET", "POST"])
+def admin_plants():
+    if not _admin_authorized():
+        return _admin_auth_error()
+
+    plants = get_all_plants()
+    if request.method == "GET":
+        return jsonify({"success": True, "count": len(plants), "plants": plants})
+
+    try:
+        plant = _validated_plant(request.get_json(silent=True))
+        if any(str(item.get("id", "")).casefold() == plant["id"] for item in plants):
+            return jsonify({"success": False, "message": "A plant with this ID already exists."}), 409
+        plants.append(plant)
+        save_all_plants(plants)
+        return jsonify({"success": True, "plant": plant}), 201
+    except ValueError as exc:
+        return jsonify({"success": False, "message": str(exc)}), 400
+
+
+@app.route("/api/admin/plants/<plant_id>", methods=["PUT", "DELETE"])
+def admin_plant(plant_id):
+    if not _admin_authorized():
+        return _admin_auth_error()
+
+    plants = get_all_plants()
+    index = next((i for i, plant in enumerate(plants) if str(plant.get("id", "")).casefold() == plant_id.casefold()), None)
+    if index is None:
+        return jsonify({"success": False, "message": "Plant not found."}), 404
+
+    if request.method == "DELETE":
+        del plants[index]
+        save_all_plants(plants)
+        return jsonify({"success": True, "count": len(plants)})
+
+    try:
+        plant = _validated_plant(request.get_json(silent=True), plants[index])
+        plant["id"] = plants[index]["id"]
+        plants[index] = plant
+        save_all_plants(plants)
+        return jsonify({"success": True, "plant": plant})
+    except ValueError as exc:
+        return jsonify({"success": False, "message": str(exc)}), 400
 
 
 @app.route("/api/analyze", methods=["POST"])

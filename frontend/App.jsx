@@ -3,6 +3,7 @@ import HomePage from './home'
 import AboutPage from './about'
 import ContactsPage from './contacts'
 import HerbPedia from './HerbPedia'
+import AdminPanel from './AdminPanel'
 import './index.css'
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
       {page === 'about-page' ? <AboutPage /> :
       page === 'contact-page' ? <ContactsPage /> :
       page === 'herbpedia-page' ? <HerbPedia /> :
+      page === 'admin-panel' ? <AdminPanel /> :
       <HomePage />}
     </>
   )
