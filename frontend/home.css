@@ -560,6 +560,20 @@
   font-weight: 600;
 }
 
+.result-confidence-note {
+  margin: 14px 0 4px;
+  padding: 12px 14px;
+  border: 1px solid #e8d99d;
+  border-radius: 10px;
+  background: #fff9e5;
+  color: #625426;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.result-confidence-note p { margin: 3px 0 6px; }
+.result-confidence-note ul { margin: 4px 0 0 18px; }
+
 .result-section {
   padding: 15px 0;
 }

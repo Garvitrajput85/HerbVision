@@ -2,13 +2,19 @@ import json
 import hmac
 import os
 import re
+import socket
+import ssl
 import subprocess
 import sys
+import uuid
+from urllib.error import HTTPError, URLError
+from urllib.parse import urlencode
+from urllib.request import Request, urlopen
 from pathlib import Path
 from threading import Lock
 
 ROOT_PATH = Path(__file__).resolve().parents[1]
-ML_ENV_PATH = ROOT_PATH / ".venv-ml"
+ML_ENV_PATH = ROOT_PATH / ".venv-ml312"
 if os.name == "nt":
     ML_PYTHON = ML_ENV_PATH / "Scripts" / "python.exe"
 else:
@@ -41,15 +47,16 @@ if ML_ENV_PATH.exists():
 
 
 def _load_admin_token_from_env_file():
-    """Load only the admin key from backend/.env without overwriting the shell."""
+    """Load backend secrets from backend/.env without overwriting the shell."""
     env_file = Path(__file__).resolve().parent / ".env"
-    if os.getenv("ADMIN_TOKEN") or not env_file.is_file():
+    if not env_file.is_file():
         return
+    wanted = {"ADMIN_TOKEN", "PLANTNET_API_KEY", "MONGODB_URI", "MONGODB_DATABASE"}
     for line in env_file.read_text(encoding="utf-8").splitlines():
         key, separator, value = line.partition("=")
-        if separator and key.strip() == "ADMIN_TOKEN":
-            os.environ["ADMIN_TOKEN"] = value.strip().strip("\"'")
-            return
+        key = key.strip()
+        if separator and key in wanted and not os.getenv(key):
+            os.environ[key] = value.strip().strip("\"'")
 
 
 _load_admin_token_from_env_file()
@@ -64,11 +71,20 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
+app.config["MAX_CONTENT_LENGTH"] = 50 * 1024 * 1024
 
 PLANT_DATA_FILE = Path(__file__).resolve().parent / "data" / "plants" / "plant_details.json"
-MODEL_PATH = Path(__file__).resolve().parents[1] / "ML" / "medicinal_plant_model.pth"
+MODEL_PATH = Path(__file__).resolve().parents[1] / "ML" / "medicinal_plant_modelmax.pth"
 CLASS_NAMES_PATH = MODEL_PATH.with_name("classes.json")
-MIN_PLANT_CONFIDENCE = float(os.getenv("PLANT_MIN_CONFIDENCE", "0.60"))
+MODEL_MIN_CONFIDENCE = float(os.getenv("MODEL_MIN_CONFIDENCE", "0.70"))
+PLANTNET_MIN_CONFIDENCE = float(os.getenv("PLANTNET_MIN_CONFIDENCE", "0.70"))
+CLASS_NAME_ALIASES = {
+    "amrathaballi": "amruthaballi",
+    "bhrami": "brahmi",
+    "globeamarnath": "globeamaranth",
+    "karanda": "koranda",
+    "thumbai": "thumbe",
+}
 _model = None
 _class_names = None
 _model_lock = Lock()
@@ -79,6 +95,7 @@ def _load_plant_model():
     global _model, _class_names
     if _model is not None:
         return _model, _class_names
+
 
     with _model_lock:
         if _model is not None:
@@ -131,6 +148,60 @@ def _load_plant_model():
         return _model, _class_names
 
 
+def _normalize_plant_name(value):
+    return "".join(character for character in str(value or "").casefold() if character.isalnum())
+
+
+def _trained_plant_records(plants=None):
+    """Return catalog details only for classes present in the trained model."""
+    if plants is None:
+        plants = get_all_plants()
+    try:
+        with CLASS_NAMES_PATH.open("r", encoding="utf-8") as file:
+            labels = json.load(file)
+        if isinstance(labels, dict):
+            labels = labels.get("class_names", [])
+    except (OSError, json.JSONDecodeError):
+        labels = []
+
+    by_key = {}
+    for plant in plants:
+        for key in (plant.get("name"), plant.get("id")):
+            normalized = _normalize_plant_name(key)
+            if normalized:
+                by_key[normalized] = plant
+
+    records = []
+    seen = set()
+    for label in labels if isinstance(labels, list) else []:
+        label_key = _normalize_plant_name(label)
+        key = _normalize_plant_name(CLASS_NAME_ALIASES.get(label_key, label))
+        plant = by_key.get(key)
+        if plant is None:
+            plant = next((item for item in plants if
+                _normalize_plant_name(item.get("name", "")).startswith(key)
+                or _normalize_plant_name(item.get("id", "")).startswith(key)
+                or (_normalize_plant_name(item.get("id", "")) and key.startswith(_normalize_plant_name(item.get("id", ""))))
+            ), None)
+        if plant and plant.get("id") not in seen:
+            records.append(plant)
+            seen.add(plant.get("id"))
+    return records
+
+
+def _is_trained_class(name):
+    normalized = _normalize_plant_name(name)
+    try:
+        labels = json.loads(CLASS_NAMES_PATH.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return False
+    if isinstance(labels, dict):
+        labels = labels.get("class_names", [])
+    accepted = {_normalize_plant_name(label) for label in labels if isinstance(label, str)} if isinstance(labels, list) else set()
+    accepted.update(_normalize_plant_name(alias) for alias in CLASS_NAME_ALIASES.values())
+    return normalized in accepted
+
+
 @app.route("/", methods=["GET"])
 def home():
     return jsonify({
@@ -142,6 +213,8 @@ def home():
 @app.route("/api/plants", methods=["GET"])
 def get_plants():
     try:
+        # HerbPedia is the full reference catalog; model classes only limit
+        # image classification and must not hide catalog entries from the UI.
         plants = get_all_plants()
         return jsonify({
             "success": True,
@@ -158,7 +231,7 @@ def get_plants():
 @app.route("/api/plants/<plant_id>", methods=["GET"])
 def get_plant(plant_id):
     try:
-        plant = find_plant_by_id(plant_id)
+        plant = next((item for item in get_all_plants() if str(item.get("id", "")).casefold() == plant_id.casefold()), None)
         if not plant:
             return jsonify({
                 "success": False,
@@ -180,7 +253,10 @@ def get_plant(plant_id):
 def search_plant_route():
     query = request.args.get("q", "").strip()
     try:
-        plants = search_plants(query)
+        if not query:
+            return jsonify({"success": True, "count": 0, "plants": []})
+        normalized_query = _normalize_plant_name(query)
+        plants = [plant for plant in get_all_plants() if normalized_query in _normalize_plant_name(plant.get("name", "")) or normalized_query in _normalize_plant_name(plant.get("scientific_name", ""))]
         return jsonify({
             "success": True,
             "count": len(plants),
@@ -265,10 +341,13 @@ def admin_plants():
 
     plants = get_all_plants()
     if request.method == "GET":
+        plants = _trained_plant_records(plants)
         return jsonify({"success": True, "count": len(plants), "plants": plants})
 
     try:
         plant = _validated_plant(request.get_json(silent=True))
+        if not _is_trained_class(plant["name"]):
+            return jsonify({"success": False, "message": "Only plants included in the trained model are supported."}), 400
         if any(str(item.get("id", "")).casefold() == plant["id"] for item in plants):
             return jsonify({"success": False, "message": "A plant with this ID already exists."}), 409
         plants.append(plant)
@@ -284,6 +363,9 @@ def admin_plant(plant_id):
         return _admin_auth_error()
 
     plants = get_all_plants()
+    allowed_ids = {str(item.get("id", "")).casefold() for item in _trained_plant_records(plants)}
+    if plant_id.casefold() not in allowed_ids:
+        return jsonify({"success": False, "message": "Only plants included in the trained model are supported."}), 404
     index = next((i for i, plant in enumerate(plants) if str(plant.get("id", "")).casefold() == plant_id.casefold()), None)
     if index is None:
         return jsonify({"success": False, "message": "Plant not found."}), 404
@@ -333,29 +415,17 @@ def analyze_plant():
         top = torch.topk(probabilities, k=min(3, len(class_names)))
         best_index = int(top.indices[0])
         best_confidence = float(top.values[0])
-        if best_confidence < MIN_PLANT_CONFIDENCE:
+        if best_confidence <= MODEL_MIN_CONFIDENCE:
             return jsonify({
                 "success": False,
-                "message": (
-                    "This image could not be confidently matched to a supported plant. "
-                    "Upload a clear, close-up photo of a plant leaf."
-                ),
+                "message": f"Model confidence must be over {MODEL_MIN_CONFIDENCE:.70%}. Please upload a new, clearer image and try again.",
             }), 422
 
         predicted_name = class_names[best_index]
         normalize_name = lambda value: "".join(character for character in str(value).casefold() if character.isalnum())
         predicted_key = normalize_name(predicted_name)
-        # The training labels use a few regional spellings that differ from the
-        # catalog entries. Resolve those to the matching database record.
-        catalog_aliases = {
-            "amrathaballi": "amruthaballi",
-            "bhrami": "brahmi",
-            "globeamarnath": "globeamaranth",
-            "karanda": "koranda",
-            "thumbai": "thumbe",
-        }
-        lookup_key = normalize_name(catalog_aliases.get(predicted_key, predicted_name))
-        plants = get_all_plants()
+        lookup_key = normalize_name(CLASS_NAME_ALIASES.get(predicted_key, predicted_name))
+        plants = _trained_plant_records()
         plant_profile = next((
             plant for plant in plants
             if normalize_name(plant.get("name", "")) == lookup_key
@@ -365,19 +435,22 @@ def analyze_plant():
         ), {})
         result = {
             "name": plant_profile.get("name", predicted_name),
+            "details_available": bool(plant_profile),
             "id": plant_profile.get("id", ""),
             "confidence": f"{best_confidence * 100:.2f}%",
+            "low_confidence": best_confidence <= MODEL_MIN_CONFIDENCE,
             "icon": plant_profile.get("icon", "🌿"),
             "scientific_name": plant_profile.get("scientific_name", ""),
             "plant_family": plant_profile.get("plant_family", ""),
             "description": plant_profile.get("description", ""),
             "medicine_properties": plant_profile.get("medicine_properties", ""),
-            "use": plant_profile.get("uses", []),
+            "uses": plant_profile.get("uses", plant_profile.get("use", [])),
             "benefits": plant_profile.get("benefits", ""),
             "growing": plant_profile.get("growing", ""),
             "parts_commonly_used": plant_profile.get("parts_commonly_used", []),
             "leaf_features": plant_profile.get("leaf_features", {}),
             "note": plant_profile.get("note", ""),
+            "identification_source": "local model",
             "predictions": [
                 {"class": class_names[int(index)], "confidence": float(score)}
                 for index, score in zip(top.indices, top.values)
@@ -385,14 +458,114 @@ def analyze_plant():
         }
         return jsonify({"success": True, "result": result})
     except ImportError as exc:
-        return jsonify({"success": False, "message": f"Install backend ML dependencies: {exc}"}), 503
+        message = f"Install backend ML dependencies: {exc}"
+        return jsonify({"success": False, "message": message}), 503
     except UnidentifiedImageError:
         return jsonify({"success": False, "message": "The uploaded file is not a valid image."}), 400
     except (ImportError, FileNotFoundError, ValueError) as exc:
-        return jsonify({"success": False, "message": str(exc)}), 503
+        message = str(exc)
+        return jsonify({"success": False, "message": message}), 503
     except Exception as exc:
         app.logger.exception("Plant image inference failed")
         return jsonify({"success": False, "message": f"Image analysis failed: {exc}"}), 500
+
+
+def _identify_with_plantnet(image_file, api_key):
+    """Send the uploaded image to PlantNet while keeping its key server-side."""
+    boundary = f"----HerbVision{uuid.uuid4().hex}"
+    image = image_file.read()
+    if not image:
+        return jsonify({"success": False, "message": "The uploaded image is empty."}), 400
+    filename = Path(image_file.filename or "plant.jpg").name.replace('"', "")
+    filename = "".join(character for character in filename if character.isprintable() and character not in "\r\n")
+    content_type = image_file.mimetype if image_file.mimetype in {"image/jpeg", "image/png"} else "image/jpeg"
+    body = b"".join([
+        f"--{boundary}\r\nContent-Disposition: form-data; name=\"images\"; filename=\"{filename}\"\r\nContent-Type: {content_type}\r\n\r\n".encode(),
+        image,
+        f"\r\n--{boundary}\r\nContent-Disposition: form-data; name=\"organs\"\r\n\r\nauto\r\n--{boundary}--\r\n".encode(),
+    ])
+    endpoint = "https://my-api.plantnet.org/v2/identify/all?" + urlencode({"api-key": api_key, "lang": "en", "nb-results": 3})
+    try:
+        req = Request(endpoint, data=body, headers={"Content-Type": f"multipart/form-data; boundary={boundary}"}, method="POST")
+        # Some macOS Python installs do not use the system Keychain CA store.
+        # Use certifi's maintained roots so valid public TLS certificates verify.
+        import certifi
+        tls_context = ssl.create_default_context(cafile=certifi.where())
+        with urlopen(req, timeout=45, context=tls_context) as response:
+            payload = json.loads(response.read().decode("utf-8"))
+    except HTTPError as exc:
+        # Do not include the request URL: it contains the private API key.
+        exc.close()
+        app.logger.warning("PlantNet request failed (HTTP %s)", exc.code)
+        if exc.code in (401, 403):
+            message = "PlantNet rejected the API key. Check PLANTNET_API_KEY in backend/.env."
+        elif exc.code == 429:
+            message = "PlantNet request limit reached. Please try again later."
+        elif exc.code == 404:
+            message = "PlantNet could not find a plant in this image. Try a clear photo of one plant."
+            return jsonify({"success": False, "message": message}), 422
+        else:
+            message = f"PlantNet identification failed (HTTP {exc.code}). Please try again."
+        return jsonify({"success": False, "message": message}), 502
+    except (URLError, TimeoutError, json.JSONDecodeError) as exc:
+        reason = exc.reason if isinstance(exc, URLError) else exc
+        if isinstance(reason, socket.gaierror):
+            message = "Backend could not resolve PlantNet's hostname. Check DNS and internet access on the computer running Flask."
+            log_reason = "DNS lookup failed"
+        elif isinstance(reason, (TimeoutError, socket.timeout)):
+            message = "PlantNet connection timed out. Check the backend computer's internet connection and try again."
+            log_reason = "connection timed out"
+        elif isinstance(reason, ssl.SSLError):
+            message = "The backend could not verify PlantNet's secure connection. Check the computer's date and SSL certificates."
+            log_reason = "TLS certificate error"
+        elif isinstance(exc, json.JSONDecodeError):
+            message = "PlantNet returned an unreadable response. Please try again later."
+            log_reason = "invalid JSON response"
+        else:
+            message = "Backend could not connect to PlantNet. Check firewall or proxy settings on the computer running Flask."
+            log_reason = "connection failed"
+        app.logger.warning("PlantNet service unavailable: %s", log_reason)
+        return jsonify({"success": False, "message": message}), 502
+
+    candidates = payload.get("results", []) if isinstance(payload, dict) else []
+    if not candidates:
+        return jsonify({"success": False, "message": "PlantNet could not identify this image. Try a clear photo of one plant."}), 422
+
+    species = candidates[0].get("species", {})
+    scientific_name = species.get("scientificNameWithoutAuthor") or species.get("scientificName") or "Unknown plant"
+    common_names = species.get("commonNames") or []
+    score = float(candidates[0].get("score", 0))
+    if score <= PLANTNET_MIN_CONFIDENCE:
+        return jsonify({
+            "success": False,
+            "low_confidence": True,
+            "message": f"PlantNet confidence must be over {PLANTNET_MIN_CONFIDENCE:.0%}. Please upload a new, clearer image and try again.",
+        }), 422
+    norm = lambda value: "".join(character for character in str(value).casefold() if character.isalnum())
+    plants = get_all_plants()
+    profile = next((plant for plant in plants if norm(plant.get("scientific_name")) == norm(scientific_name)), None)
+    if profile is None:
+        profile = next((plant for plant in plants if any(norm(plant.get("name")) == norm(name) for name in common_names)), {})
+    result = {
+        "name": (profile.get("name") if profile else None) or (common_names[0] if common_names else scientific_name),
+        "details_available": bool(profile),
+        "id": profile.get("id", "") if profile else "",
+        "confidence": f"{score * 100:.2f}%",
+        "low_confidence": score <= PLANTNET_MIN_CONFIDENCE,
+        "icon": profile.get("icon", "🌿") if profile else "🌿",
+        "scientific_name": profile.get("scientific_name", "") if profile else "",
+        "plant_family": profile.get("plant_family", "") if profile else "",
+        "description": profile.get("description", "") if profile else "",
+        "medicine_properties": profile.get("medicine_properties", "") if profile else "",
+        "uses": profile.get("uses", profile.get("use", [])) if profile else [],
+        "benefits": profile.get("benefits", "") if profile else "",
+        "growing": profile.get("growing", "") if profile else "",
+        "parts_commonly_used": profile.get("parts_commonly_used", []) if profile else [],
+        "leaf_features": profile.get("leaf_features", {}) if profile else {},
+        "note": profile.get("note", "") if profile else "",
+        "predictions": [{"class": (item.get("species", {}).get("scientificNameWithoutAuthor") or "Unknown"), "confidence": float(item.get("score", 0))} for item in candidates[:3]],
+    }
+    return jsonify({"success": True, "result": result})
 
 
 if __name__ == "__main__":

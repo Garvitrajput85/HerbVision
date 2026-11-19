@@ -1,0 +1,36 @@
+/* HerbPedia editorial refresh */
+.herbpedia-page{background:#f4f4ed}
+.herbpedia-nav{min-height:74px;padding-inline:max(24px,calc((100% - 1400px)/2));background:rgba(250,251,247,.94);box-shadow:0 4px 18px rgba(32,53,35,.045)}
+.herbpedia-brand{font-size:21px;letter-spacing:-.045em}
+.herbpedia-home-link{padding:9px 14px;border:1px solid #dce6d8;border-radius:999px;background:#fff;font-size:13px}
+.herbpedia-intro{position:relative;isolation:isolate;display:flex;min-height:268px;flex-direction:column;align-items:flex-start;justify-content:center;width:min(1400px,calc(100% - 64px));margin:34px auto 30px;padding:38px 52px;overflow:hidden;border:1px solid rgba(219,231,211,.2);border-radius:28px;background:linear-gradient(105deg,#173c2e 0%,#234b37 58%,#2d5b40 100%);box-shadow:0 22px 50px rgba(26,57,39,.16);text-align:left}
+.herbpedia-intro:before{position:absolute;z-index:-1;inset:0;background:radial-gradient(circle at 18% 110%,rgba(180,210,135,.2),transparent 40%),linear-gradient(90deg,rgba(18,54,39,.05) 0%,rgba(18,54,39,.1) 49%,rgba(18,54,39,.82) 77%,#173c2e 100%);content:""}
+.herbpedia-intro:after{position:absolute;z-index:-2;top:0;right:0;width:52%;height:100%;background:url('/img/plants/tulsi.jpg') center 42%/cover no-repeat;content:"";opacity:.88;mask-image:linear-gradient(90deg,transparent 0%,#000 36%)}
+.herbpedia-eyebrow{border-color:rgba(221,237,206,.24);background:rgba(226,239,214,.1);color:#d5e6c9;font-size:10px;letter-spacing:.2em}
+.herbpedia-intro h1{margin:17px 0 9px;color:#fff;font-size:clamp(42px,5.4vw,62px);font-weight:750;letter-spacing:-.065em;line-height:1}
+.herbpedia-intro>p{max-width:570px;margin:0 0 18px;color:rgba(244,248,239,.78);font-size:14px;line-height:1.75}
+.plant-count{border-color:rgba(227,240,216,.22);background:rgba(235,245,225,.12);color:#e8f2df;font-size:11px;backdrop-filter:blur(8px)}
+.herbpedia-layout{grid-template-columns:340px minmax(0,1fr);gap:20px;width:min(1400px,calc(100% - 64px));margin-bottom:42px}
+.herb-list-panel,.herb-detail-panel{border-color:#e1e7dc;border-radius:22px;box-shadow:0 14px 38px rgba(39,57,38,.065)}
+.herb-list-panel{top:92px;max-height:min(78vh,920px)}
+.herb-search-box{padding:14px 14px 12px;background:#f8faf5}
+.herb-search-box input{border-color:#e0e6da;border-radius:11px;background:white;font-size:13px}
+.search-results-count{border:1px solid #dee8d7;background:#edf3e7}
+.herb-list-item{gap:12px;padding:10px 13px}
+.herb-photo.compact{width:56px;height:56px;border-radius:14px}
+.herb-list-item.selected{background:linear-gradient(90deg,#eaf1e4,#f8faf5 88%);box-shadow:inset 3px 0 #567b48}
+.herb-detail-panel{background:#fff}
+.detail-top-row{grid-template-columns:minmax(250px,34%) minmax(0,1fr);gap:24px;padding:24px 24px 0}
+.detail-image-wrap{border-radius:18px}
+.herb-photo:not(.compact){height:clamp(250px,30vw,350px)}
+.detail-heading h2{font-size:clamp(25px,2.4vw,34px)}
+.plant-names{border-radius:14px;background:#f6f8f3}
+.plant-names p{font-size:18px;line-height:2.50}
+.plant-family{font-size:16px}
+.herb-detail-body{padding:22px 24px 26px}
+.detail-grid{gap:12px}
+.herb-detail-item{border-radius:14px;background:#fafbf8}
+.herbpedia-disclaimer{padding-bottom:24px}
+.herbpedia-footer{border-top:1px solid #dfe6da;background:#e9eee5}
+@media(max-width:980px){.herbpedia-intro{min-height:240px;width:min(760px,calc(100% - 36px));padding:32px 34px}.herbpedia-intro:after{width:55%}.herbpedia-layout{width:min(760px,calc(100% - 36px))}.herb-list-panel{max-height:390px}.herb-list{max-height:320px}}
+@media(max-width:640px){.herbpedia-nav{min-height:64px;padding:10px 16px}.herbpedia-brand{font-size:18px}.herbpedia-home-link{padding:8px 11px;font-size:12px}.herbpedia-intro{min-height:250px;width:calc(100% - 24px);margin:18px auto 18px;padding:27px 22px;border-radius:20px}.herbpedia-intro:before{background:linear-gradient(90deg,rgba(18,54,39,.25),rgba(18,54,39,.75) 75%,rgba(18,54,39,.84))}.herbpedia-intro:after{width:72%;opacity:.5;mask-image:linear-gradient(90deg,transparent 0%,#000 55%)}.herbpedia-intro h1{font-size:44px}.herbpedia-intro>p{max-width:390px;font-size:12px}.herbpedia-layout{width:calc(100% - 24px);gap:12px}.herb-list-panel,.herb-detail-panel{border-radius:17px}.detail-top-row{gap:15px;padding:15px 15px 0}.herb-photo:not(.compact){height:260px}.detail-heading h2{font-size:23px}.herb-description{font-size:14px}.herb-detail-body{padding:16px 15px 19px}.herb-detail-item{padding:13px}}

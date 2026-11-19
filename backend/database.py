@@ -18,11 +18,8 @@ FRONTEND_PLANT_DATA_FILE = BASE_DIR.parent / "frontend" / "plant_details.json"
 ADMIN_CATALOG_FILE = BASE_DIR / "data" / "plants" / "admin_catalog.json"
 ADMIN_CATALOG_ID = "herbvision_admin_catalog"
 
-MONGO_URI = os.getenv(
-    "MONGO_URI",
-    "mongodb+srv://garvitrajput85_db_user:xunQmVFJk5i6ahnJ@cluster0.0v9ydkr.mongodb.net/"
-)
-MONGO_DB = os.getenv("MONGO_DB", "HerbVision")
+MONGO_URI = os.getenv("MONGO_URI") or os.getenv("MONGODB_URI", "")
+MONGO_DB = os.getenv("MONGO_DB") or os.getenv("MONGODB_DATABASE", "HerbVision")
 PLANTS_COLLECTION = "Plants"
 
 client = None
@@ -33,9 +30,18 @@ plants_collection = None
 def _connect_mongo():
     global client, collection, plants_collection
 
+    if os.getenv("HERBVISION_LOCAL_MODE") == "1":
+        print("HerbVision local mode: using the bundled plant catalog.")
+        return None
+    if not MONGO_URI:
+        print("MongoDB is not configured; using the bundled plant catalog.")
+        return None
+
     try:
         mongo_kwargs = {
-            "serverSelectionTimeoutMS": 5000,
+            "serverSelectionTimeoutMS": 3000,
+            "connectTimeoutMS": 3000,
+            "socketTimeoutMS": 3000,
         }
 
         if certifi is not None:

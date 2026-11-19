@@ -232,6 +232,7 @@ const HomePage = () => {
   try {
 
     setAnalyzing(true);
+    setAnalysisResults(null);
     setAnalysisError('');
     setActiveTab('results');
 
@@ -429,7 +430,7 @@ const HomePage = () => {
             <input
               type="text"
               className="search-input"
-              placeholder="Search herbs, plants, or diseases..."
+              placeholder="126 Herbs Plants..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               autoComplete="off"
@@ -645,10 +646,28 @@ const HomePage = () => {
                     <>
                       <div className="result-header">
                         <span className="plant-icon">{analysisResults.icon}</span>
-                        <h3>{analysisResults.name}</h3>
+                        <h3>{analysisResults.identification_source === 'local model' || analysisResults.low_confidence ? 'Possible match: ' : ''}{analysisResults.name}</h3>
                         <span className="confidence">Confidence: {analysisResults.confidence}</span>
                       </div>
 
+                      {(analysisResults.identification_source === 'local model' || analysisResults.low_confidence) && (
+                        <div className="result-confidence-note" role="status">
+                          <strong>{analysisResults.low_confidence ? 'Low confidence' : 'Local model suggestion'}</strong>
+                          <p>Compare these candidates; the local model can mistake plants outside its training set.</p>
+                          {analysisResults.predictions?.length > 0 && (
+                            <ul>
+                              {analysisResults.predictions.map((prediction) => (
+                                <li key={prediction.class}>
+                                  {prediction.class} ({(prediction.confidence * 100).toFixed(1)}%)
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                        </div>
+                      )}
+
+                      {analysisResults.details_available ? (
+                      <>
                       {(analysisResults.scientific_name || analysisResults.plant_family) && (
                         <div className="result-section">
                           <h4>Plant Details:</h4>
@@ -716,6 +735,13 @@ const HomePage = () => {
                         <div className="result-section">
                           <h4>Note:</h4>
                           <p>{analysisResults.note}</p>
+                        </div>
+                      )}
+                      </>
+                      ) : (
+                        <div className="result-section" role="status">
+                          <h4>Plant details unavailable</h4>
+                          <p>This plant was recognized, but its details are not available in our data yet.</p>
                         </div>
                       )}
 

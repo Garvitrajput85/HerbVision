@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import localPlantDetails from './plant_details.json';
+import plantPhotos from './plant_photos.json';
 import './herbpedia.css';
+import './herbpedia-refresh.css';
 
 const HINDI_NAMES = {
   ashwagandha: 'अश्वगंधा', 'aloe-vera': 'घृतकुमारी (एलोवेरा)', neem: 'नीम', amla: 'आँवला', arjuna: 'अर्जुन',
@@ -99,6 +101,17 @@ function PlantPhoto({ plant, compact = false }) {
     if (!visible) return undefined;
     setPhoto(null);
     setPhotoUnavailable(false);
+
+    const suppliedPhoto = plantPhotos[plant.id];
+    if (suppliedPhoto) {
+      setPhoto({
+        url: typeof suppliedPhoto === 'string' ? suppliedPhoto : suppliedPhoto.url,
+        supplied: true,
+        credit: suppliedPhoto.credit,
+        creditUrl: suppliedPhoto.creditUrl
+      });
+      return undefined;
+    }
 
     const leafSearchTerms = [
       `${plant.scientific_name} leaf`,
@@ -204,7 +217,8 @@ function PlantPhoto({ plant, compact = false }) {
     <div className={compact ? 'herb-photo compact' : 'herb-photo'} ref={photoRef}>
       {photo ? <>
         <img src={photo.url} alt={`${plant.name} leaf close-up`} loading="lazy" onError={() => { setPhoto(null); setPhotoUnavailable(true); }} />
-        {!compact && <a className="photo-credit" href={photo.page} target="_blank" rel="noreferrer">Photo: {photo.artist} · {photo.license}</a>}
+        {!compact && photo.credit && <a className="photo-credit" href={photo.creditUrl} target="_blank" rel="noreferrer">Photo: {photo.credit}</a>}
+        {!compact && !photo.supplied && <a className="photo-credit" href={photo.page} target="_blank" rel="noreferrer">Photo: {photo.artist} · {photo.license}</a>}
       </> : <div className="photo-placeholder" aria-label={`Leaf photo of ${plant.name} loading or unavailable`}>
         <span aria-hidden="true">{photoUnavailable ? '🌱' : '🌿'}</span>
         {!compact && <small>{photoUnavailable ? 'No openly licensed leaf photo found' : visible ? 'Real leaf photo loading…' : 'Real leaf photo'}</small>}
@@ -236,11 +250,15 @@ function HerbPedia() {
         if (!data.success) throw new Error(data.message || 'Could not load plants');
         if (!cancelled) {
           const detailsById = new Map((localPlantDetails.plants || []).map((plant) => [plant.id, plant]));
-          const plantList = (Array.isArray(data.plants) ? data.plants : []).map((plant) => ({
-            ...detailsById.get(plant.id),
-            ...plant,
-            ...Object.fromEntries(['hindi_name', 'local_names', 'popular_names'].filter((key) => detailsById.get(plant.id)?.[key]).map((key) => [key, detailsById.get(plant.id)[key]]))
-          })).slice().sort((a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: 'base' }));
+          const plantList = (Array.isArray(data.plants) ? data.plants : []).map((plant) => {
+            const localDetails = detailsById.get(plant.id);
+            return {
+              ...localDetails,
+              ...plant,
+              ...Object.fromEntries(['hindi_name', 'local_names', 'popular_names'].filter((key) => localDetails?.[key]).map((key) => [key, localDetails[key]])),
+              ...Object.fromEntries(['plant_family', 'description'].filter((key) => localDetails?.[key] && !plant[key]).map((key) => [key, localDetails[key]]))
+            };
+          }).slice().sort((a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: 'base' }));
           setPlants(plantList);
           setSelectedPlantId(plantList[0]?.id || null);
         }
