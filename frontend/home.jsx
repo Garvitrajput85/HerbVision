@@ -406,7 +406,7 @@ const HomePage = () => {
           <ul className="nav-links">
             <li><a href="#about-page">About</a></li>
             <li><a href="#herbpedia-page">HerbPedia</a></li>
-            <li><a href="#services">Services</a></li>
+            <li><a href="#background-remover-page">Services</a></li>
             <li><a href="#contact-page">Contact</a></li>
           </ul>
 

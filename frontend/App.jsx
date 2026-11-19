@@ -4,6 +4,7 @@ import AboutPage from './about'
 import ContactsPage from './contacts'
 import HerbPedia from './HerbPedia'
 import AdminPanel from './AdminPanel'
+import BackgroundRemover from '../Services/background/frontend/BackgroundRemover'
 import './index.css'
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
       {page === 'about-page' ? <AboutPage /> :
       page === 'contact-page' ? <ContactsPage /> :
       page === 'herbpedia-page' ? <HerbPedia /> :
+      page === 'background-remover-page' ? <BackgroundRemover /> :
       page === 'admin-panel' ? <AdminPanel /> :
       <HomePage />}
     </>
